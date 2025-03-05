@@ -27,6 +27,7 @@ resource "hcloud_server" "main" {
     prefer_fqdn_over_hostname: true
     packages:
       - git
+      - curl
     package_update: true
     package_upgrade: true
     power_state:
@@ -35,8 +36,7 @@ resource "hcloud_server" "main" {
       filename: /swapfile
       size: 512M
     runcmd:
-      - su ubuntu -c "git clone --depth 1 git@github.com:tjo-space/infrastructure-ng.git /home/ubuntu/service"
-      - su ubuntu -c "/home/ubuntu/service/install.sh"
+      - su ubuntu -c "bash <(curl -s https://raw.githubusercontent.com/tjo-space/tjo-space-infrastructure/refs/heads/main/install.sh)"
   EOF
 }
 
