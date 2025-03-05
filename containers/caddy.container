@@ -1,0 +1,14 @@
+[Unit]
+Description=A Caddy Container
+
+[Container]
+Image=docker.io/caddy:2.9
+PublishPort=443
+Volume=/etc/caddy:/etc/caddy
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+WantedBy=authentik-server.service

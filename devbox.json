@@ -1,0 +1,15 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.13.7/.schema/devbox.schema.json",
+  "packages": [
+    "tflint@latest",
+    "tenv@latest",
+    "just@latest"
+  ],
+  "env": {
+    "TFENV_AUTO_INSTALL": "true"
+  },
+  "shell": {
+    "init_hook": [],
+    "scripts":   {}
+  }
+}

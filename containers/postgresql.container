@@ -1,0 +1,14 @@
+[Unit]
+Description=A Postgresql Container
+
+[Container]
+Image=docker.io/postgresql:17.4
+Volime=/var/lib/postgresql/data:/srv/postgresql/data
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+RequiredBy=authentik-server.service
+RequiredBy=authentik-worker.service

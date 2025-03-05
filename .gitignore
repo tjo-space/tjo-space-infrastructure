@@ -1,0 +1,28 @@
+# Encrypted environment variables
+env
+*.env
+!root/**/*.env
+
+# Encrypted ssh keys
+ssh
+*.ssh
+
+# ---> Terraform
+# Local .terraform directories
+**/.terraform/*
+**/.tofu/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+!*.tfstate.encrypted
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+.tofurc
+tofu.rc

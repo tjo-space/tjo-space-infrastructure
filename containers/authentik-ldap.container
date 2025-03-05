@@ -1,0 +1,12 @@
+[Unit]
+Description=An Authentik LDAP Server
+
+[Container]
+Image=ghcr.io/goauthentik/ldap:2025.2.1
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+After=authentik-server.service

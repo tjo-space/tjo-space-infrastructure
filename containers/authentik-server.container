@@ -1,0 +1,11 @@
+[Unit]
+Description=An Authentik Server
+
+[Container]
+Image=ghcr.io/goauthentik/authentik:2025.2.1
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
