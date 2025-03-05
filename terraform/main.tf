@@ -4,43 +4,6 @@ resource "hcloud_ssh_key" "main" {
   public_key = eeach.value
 }
 
-resource "hcloud_firewall" "main" {
-  name = "main"
-
-  # ICMP
-  rule {
-    direction = "in"
-    protocol  = "icmp"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-  # HTTPS
-  rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "443"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-
-
-  # SSH
-  rule {
-    direction = "in"
-    protocol  = "tcp"
-    port      = "22"
-    source_ips = [
-      "0.0.0.0/0",
-      "::/0"
-    ]
-  }
-}
-
 resource "hcloud_server" "main" {
   name        = "id.tjo.space"
   image       = "ubuntu-24.04"
@@ -52,8 +15,6 @@ resource "hcloud_server" "main" {
     ipv4_enabled = true
     ipv6_enabled = true
   }
-
-  firewall_ids = [hcloud_firewall.main.id]
 
   backups = true
 
