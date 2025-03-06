@@ -2,7 +2,7 @@
 set -euo pipefail
 
 echo "== Fetch Source Code (from git)"
-cd "$HOME/service"
+cd "/root/service"
 # Clone if not yet cloned
 if [ ! -d .git ]; then
   git clone \
