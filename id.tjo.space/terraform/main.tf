@@ -65,12 +65,13 @@ resource "dnsimple_zone_record" "a" {
   ttl       = 300
 }
 
-resource "dnsimple_zone_record" "aaaa" {
-  for_each = local.nodes
-
-  zone_name = "tjo.space"
-  name      = trimsuffix(each.value.meta.domain, ".tjo.space")
-  value     = hcloud_server.main[each.key].ipv6_address
-  type      = "AAAA"
-  ttl       = 300
-}
+# Podman is PITA!
+#resource "dnsimple_zone_record" "aaaa" {
+#  for_each = local.nodes
+#
+#  zone_name = "tjo.space"
+#  name      = trimsuffix(each.value.meta.domain, ".tjo.space")
+#  value     = hcloud_server.main[each.key].ipv6_address
+#  type      = "AAAA"
+#  ttl       = 300
+#}

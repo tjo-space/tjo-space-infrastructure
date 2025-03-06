@@ -48,4 +48,4 @@ cat <<EOF >/etc/caddy/env
 DOMAIN_NAME=${DOMAIN_NAME}
 EOF
 
-systemctl enable --now caddy
+systemctl start caddy
