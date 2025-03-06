@@ -1,8 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
+SERVICE_DIR="/root/service"
+mkdir -p ${SERVICE_DIR}
+cd ${SERVICE_DIR}
+
 echo "== Fetch Source Code (from git)"
-cd "/root/service"
 # Clone if not yet cloned
 if [ ! -d .git ]; then
   git clone \
@@ -30,4 +33,5 @@ ufw allow 636/tcp # LDAPS
 ufw enable
 
 echo "=== Setup Containers"
+cp -r /id.tjo.space/configs /etc/
 cp -r /id.tjo.space/containers /etc/containers/systemd/
