@@ -5,6 +5,7 @@ Description=A Caddy Container
 Image=docker.io/caddy:2.9
 PublishPort=443
 Volume=/etc/caddy:/etc/caddy
+EnvironmentFile=/etc/caddy/env
 
 [Service]
 Restart=always

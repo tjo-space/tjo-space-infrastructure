@@ -1,11 +1,11 @@
 variable "hcloud_token" {
   sensitive = true
-  type = string
+  type      = string
 }
 
 variable "dnsimple_token" {
   sensitive = true
-  type = string
+  type      = string
 }
 
 variable "dnsimple_account_id" {
