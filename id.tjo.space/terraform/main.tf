@@ -40,7 +40,7 @@ resource "hcloud_server" "main" {
       filename: /swapfile
       size: 512M
     runcmd:
-      - su ubuntu -c "bash <(curl -s https://raw.githubusercontent.com/tjo-space/tjo-space-infrastructure/refs/heads/main/install.sh)"
+      - bash <(curl -s https://raw.githubusercontent.com/tjo-space/tjo-space-infrastructure/refs/heads/main/install.sh)
   EOF
 }
 
@@ -48,7 +48,7 @@ resource "dnsimple_zone_record" "a" {
   for_each = toset(var.nodes)
 
   zone_name = "tjo.space"
-  name      = "id.tjo.space"
+  name      = "next.id"
   value     = hcloud_server.main[each.key].ipv4_address
   type      = "A"
   ttl       = 300
@@ -58,7 +58,7 @@ resource "dnsimple_zone_record" "aaaa" {
   for_each = toset(var.nodes)
 
   zone_name = "tjo.space"
-  name      = "id.tjo.space"
+  name      = "next.id"
   value     = hcloud_server.main[each.key].ipv6_address
   type      = "AAAA"
   ttl       = 300
