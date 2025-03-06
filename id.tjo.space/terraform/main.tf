@@ -1,11 +1,15 @@
 resource "hcloud_ssh_key" "main" {
   for_each   = var.ssh_keys
+
   name       = each.key
-  public_key = eeach.value
+  public_key = each.value
 }
 
 resource "hcloud_server" "main" {
-  name        = "id.tjo.space"
+  for_each = toset(var.nodes)
+
+  name        = "${each.key}.id.tjo.space"
+
   image       = "ubuntu-24.04"
   server_type = "cax11"
 
@@ -18,11 +22,11 @@ resource "hcloud_server" "main" {
 
   backups = true
 
-  ssh_keys = [for key in var.ssh_keys : hcloud_ssh_key.main[key].id]
+  ssh_keys = [for key, value in var.ssh_keys : hcloud_ssh_key.main[key].id]
 
   user_data = <<-EOF
     #cloud-config
-    hostname: id
+    hostname: ${each.key}
     fqdn: id.tjo.space
     prefer_fqdn_over_hostname: true
     packages:
@@ -41,17 +45,21 @@ resource "hcloud_server" "main" {
 }
 
 resource "dnsimple_zone_record" "a" {
+  for_each = toset(var.nodes)
+
   zone_name = "tjo.space"
   name      = "id.tjo.space"
-  value     = hcloud_server.main.ipv4_address
+  value     = hcloud_server.main[each.key].ipv4_address
   type      = "A"
   ttl       = 300
 }
 
 resource "dnsimple_zone_record" "aaaa" {
+  for_each = toset(var.nodes)
+
   zone_name = "tjo.space"
   name      = "id.tjo.space"
-  value     = hcloud_server.main.ipv6_address
+  value     = hcloud_server.main[each.key].ipv6_address
   type      = "AAAA"
   ttl       = 300
 }

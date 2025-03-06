@@ -19,5 +19,5 @@ provider "hcloud" {
 
 provider "dnsimple" {
   token   = var.dnsimple_token
-  account = var.dnsimple_aaccount_id
+  account = var.dnsimple_account_id
 }

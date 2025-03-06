@@ -15,7 +15,7 @@ if [ ! -d .git ]; then
     --depth 1 \
     --no-checkout \
     --filter=tree:0 \
-    https://github.com/tjo-space/tjo-cloud-infrastructure.git .
+    https://github.com/tjo-space/tjo-space-infrastructure.git .
   git sparse-checkout set --no-cone /id.tjo.space
   git checkout
 else
@@ -37,10 +37,6 @@ function provision() {
   ufw allow 443/tcp # HTTPS
   ufw allow 636/tcp # LDAPS
   ufw enable
-
-  ##
-  echo "=== Setting up the user"
-  loginctl enable-linger "ubuntu"
 }
 
 echo "=== Provision the System (as root)"
