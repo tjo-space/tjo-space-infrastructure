@@ -1,4 +1,4 @@
-next.id.tjo.space
+{$DOMAIN_NAME}
 
 respond /tjo-space/status "OK"
 
