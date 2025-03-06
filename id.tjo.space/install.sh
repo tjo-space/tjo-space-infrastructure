@@ -29,6 +29,7 @@ DEBIAN_FRONTEND=noninteractive apt install -y \
 
 echo "=== Configure Firewall"
 ufw allow 22/tcp  # SSH
+ufw allow 80/tcp  # HTTP
 ufw allow 443/tcp # HTTPS
 ufw allow 636/tcp # LDAPS
 ufw --force enable
@@ -39,6 +40,8 @@ DOMAIN_NAME=$(jq -r ".domain" /etc/tjo.space/meta.json)
 echo "=== Copy Configuration Files"
 rsync -av id.tjo.space/containers/ /etc/containers/systemd/
 rsync -av id.tjo.space/configs/ /etc/
+
+systemctl daemon-reload
 
 echo "=== Setup Caddy"
 cat <<EOF >/etc/caddy/env
