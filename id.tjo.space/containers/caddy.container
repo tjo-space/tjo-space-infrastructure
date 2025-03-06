@@ -3,8 +3,8 @@ Description=A Caddy Container
 
 [Container]
 Image=docker.io/caddy:2.9
-PublishPort=443
-PublishPort=80
+PublishPort=443:443
+PublishPort=80:80
 Volume=/etc/caddy:/etc/caddy
 EnvironmentFile=/etc/caddy/env
 
