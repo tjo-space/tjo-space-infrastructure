@@ -28,3 +28,6 @@ ufw allow 22/tcp  # SSH
 ufw allow 443/tcp # HTTPS
 ufw allow 636/tcp # LDAPS
 ufw enable
+
+echo "=== Setup Containers"
+cp -r /id.tjo.space/containers /etc/containers/systemd/

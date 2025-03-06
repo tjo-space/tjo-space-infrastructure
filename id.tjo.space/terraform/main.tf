@@ -26,7 +26,7 @@ resource "hcloud_server" "main" {
 
   user_data = <<-EOF
     #cloud-config
-    hostname: ${each.key}
+    hostname: "${each.key}"
     fqdn: id.tjo.space
     prefer_fqdn_over_hostname: true
     packages:
@@ -40,8 +40,8 @@ resource "hcloud_server" "main" {
       filename: /swapfile
       size: 512M
     runcmd:
-      - bash <(curl -s https://raw.githubusercontent.com/tjo-space/tjo-space-infrastructure/refs/heads/main/install.sh)
-  EOF
+      - "curl -sL https://raw.githubusercontent.com/tjo-space/tjo-space-infrastructure/refs/heads/main/id.tjo.space/install.sh | bash"
+    EOF
 }
 
 resource "dnsimple_zone_record" "a" {

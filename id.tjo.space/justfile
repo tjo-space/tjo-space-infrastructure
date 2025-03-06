@@ -63,13 +63,20 @@ outputs:
   cd {{source_directory()}}/terraform
   tofu output
 
-configure:
+ssh node:
+  #!/usr/bin/env sh
+  pushd {{source_directory()}}/terraform > /dev/null
+  IPV4=$(tofu output -json | jq -r '.ipv4[{{node}}]')
+  popd > /dev/null
+  ssh root@${IPV4}
+
+configure node:
   #!/usr/bin/env sh
   set -eou pipefail
 
   pushd {{source_directory()}}/terraform > /dev/null
-  IPV4=$(tofu output -json | jq -r '.ipv4')
+  IPV4=$(tofu output -json | jq -r '.ipv4[{{node}}]')
   popd > /dev/null
 
   echo "= Provisioning id.tjo.space"
-  cat install.sh | ssh ubuntu@${IPV4} 'sudo bash -s'
+  cat install.sh | ssh root@${IPV4} 'sudo bash -s'
