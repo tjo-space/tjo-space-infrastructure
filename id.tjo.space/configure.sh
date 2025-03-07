@@ -47,17 +47,17 @@ mkdir -p /srv/authentik/{media,certs,custom-templates}
 mkdir -p /srv/postgresql/data
 
 echo "=== Setup Caddy"
-systemctl start caddy
+systemctl restart caddy
 
 echo "=== Setup Postgresql"
 mkdir -p /etc/postgresql
 cat <<EOF >/etc/postgresql/secrets.env
 POSTGRES_PASSWORD=${POSTGRESQL_PASSWORD}
 EOF
-systemctl start postgresql
+systemctl restart postgresql
 
 echo "=== Setup Valkey"
-systemctl start valkey
+systemctl restart valkey
 
 echo "=== Setup Authentik Server"
 mkdir -p /etc/authentik
@@ -66,7 +66,7 @@ AUTHENTIK_SECRET_KEY=${AUTHENTIK_SECRET_KEY}
 AUTHENTIK_EMAIL__PASSWORD=${AUTHENTIK_EMAIL__PASSWORD}
 AUTHENTIK_POSTGRESQL__PASSWORD=${POSTGRESQL_PASSWORD}
 EOF
-systemctl start authentik-server
+systemctl restart authentik-server
 
 echo "=== Setup Authentik Worker"
-systemctl start authentik-worker
+systemctl restart authentik-worker
