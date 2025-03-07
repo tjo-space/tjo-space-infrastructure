@@ -23,6 +23,7 @@ fi
 echo "=== Configure Firewall"
 ufw default deny incoming
 ufw default allow outgoing
+ufw default allow forward
 
 ufw allow 22/tcp  # SSH
 ufw allow 80/tcp  # HTTP
