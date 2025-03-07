@@ -1,6 +1,19 @@
 default:
   @just --list
 
+secrets-encrypt:
+  #!/usr/bin/env sh
+  age --encrypt \
+    -r age1cl3d4wtrrqrgldmrzpu53q2mk60r7hrhrymsrwss8s57z4mdv9fst4a55h \
+    -r age1a4t9l73au9fqfk0x5kw6v06ewwpl0lurw73f3m60c5ly58r3hp5q6shdfr \
+    secrets.env > secrets.env.encrypted
+
+secrets-decrypt:
+  #!/usr/bin/env sh
+  age --decrypt \
+    -i ${HOME}/.config/sops/age/keys.txt \
+    secrets.env.encrypted > secrets.env
+
 apply:
   #!/usr/bin/env sh
   cd {{source_directory()}}/terraform
@@ -17,20 +30,24 @@ outputs:
   cd {{source_directory()}}/terraform
   tofu output
 
-ssh node:
+provision node:
   #!/usr/bin/env sh
+  set -eou pipefail
+
   pushd {{source_directory()}}/terraform > /dev/null
-  IPV4=$(tofu output -json | jq -r '.ipv4[{{node}}]')
+  IPV4=$(tofu output -json | jq -r '.ipv4.value["{{node}}"]')
   popd > /dev/null
-  ssh root@${IPV4}
+
+  echo "= Provision node: {{node}} (${IPV4})"
+  cat provision.sh | ssh -o StrictHostKeyChecking=no root@${IPV4} 'sudo bash -s'
 
 configure node:
   #!/usr/bin/env sh
   set -eou pipefail
 
   pushd {{source_directory()}}/terraform > /dev/null
-  IPV4=$(tofu output -json | jq -r '.ipv4[{{node}}]')
+  IPV4=$(tofu output -json | jq -r '.ipv4.value["{{node}}"]')
   popd > /dev/null
 
-  echo "= Provisioning id.tjo.space"
-  cat install.sh | ssh root@${IPV4} 'sudo bash -s'
+  echo "= Configuring node: {{node}} (${IPV4})"
+  cat configure.sh | ssh -o StrictHostKeyChecking=no root@${IPV4} 'sudo bash -s'

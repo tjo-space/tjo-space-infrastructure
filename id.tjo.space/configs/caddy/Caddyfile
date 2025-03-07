@@ -2,7 +2,7 @@
     acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
 }
 
-{$DOMAIN_NAME}
+next.id.tjo.space
 
 respond /tjo-space/status "OK"
 

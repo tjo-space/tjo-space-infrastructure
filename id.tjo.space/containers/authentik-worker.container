@@ -4,6 +4,8 @@ Description=An Authentik Worker
 [Container]
 Image=ghcr.io/goauthentik/authentik:2025.2.1
 Exec=worker
+EnvironmentFile=/etc/authentik/authentik.env
+EnvironmentFile=/etc/authentik/secrets.env
 
 [Service]
 Restart=always

@@ -3,6 +3,9 @@ Description=An Authentik LDAP Server
 
 [Container]
 Image=ghcr.io/goauthentik/ldap:2025.2.1
+Environment=AUTHENTIK_HOST=https://next.id.tjo.space
+Environment=AUTHENTIK_INSECURE=false
+EnvironmentFile=/etc/authentik/ldap.secrets.env
 
 [Service]
 Restart=always

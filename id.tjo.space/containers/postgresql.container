@@ -3,7 +3,10 @@ Description=A Postgresql Container
 
 [Container]
 Image=docker.io/postgresql:17.4
-Volime=/var/lib/postgresql/data:/srv/postgresql/data
+Volume=/var/lib/postgresql/data:/srv/postgresql/data
+EnvironmentFile=/etc/postgresql/secrets.env
+Environment=POSTGRES_USER=id.tjo.space
+Environment=POSTGRES_DB=id.tjo.space
 
 [Service]
 Restart=always

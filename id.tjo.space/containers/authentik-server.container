@@ -3,6 +3,9 @@ Description=An Authentik Server
 
 [Container]
 Image=ghcr.io/goauthentik/authentik:2025.2.1
+EnvironmentFile=/etc/authentik/authentik.env
+EnvironmentFile=/etc/authentik/secrets.env
+Volume=/media:/srv/authentik/media
 
 [Service]
 Restart=always

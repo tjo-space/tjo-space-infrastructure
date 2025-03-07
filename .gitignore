@@ -1,11 +1,9 @@
-# Encrypted environment variables
-env
-*.env
-!root/**/*.env
+# ---> Dot ENV
+.env
 
-# Encrypted ssh keys
-ssh
-*.ssh
+# ---> Secrets
+**/secrets.env
+!**/secrets.env.encrypted
 
 # ---> Terraform
 # Local .terraform directories
