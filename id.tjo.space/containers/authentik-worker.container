@@ -6,6 +6,9 @@ Image=ghcr.io/goauthentik/authentik:2025.2.1
 Exec=worker
 EnvironmentFile=/etc/authentik/authentik.env
 EnvironmentFile=/etc/authentik/secrets.env
+Volume=/media:/srv/authentik/media
+Volume=/certs:/srv/authentik/certs
+Volume=/custom-templates:/srv/authentik/custom-templates
 
 [Service]
 Restart=always
