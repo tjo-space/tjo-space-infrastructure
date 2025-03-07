@@ -3,7 +3,6 @@ Description=A Valkey Container
 
 [Container]
 Image=docker.io/valkey/valkey:8
-Memory=1g
 
 [Service]
 Restart=always
