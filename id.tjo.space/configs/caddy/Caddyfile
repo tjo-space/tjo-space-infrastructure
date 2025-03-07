@@ -6,4 +6,4 @@ next.id.tjo.space
 
 respond /tjo-space/status "OK"
 
-reverse_proxy authentik-server:9000
+reverse_proxy systemd-authentik-server:9000
