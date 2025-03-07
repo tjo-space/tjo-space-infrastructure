@@ -46,6 +46,7 @@ echo "=== Setup Caddy"
 systemctl start caddy
 
 echo "=== Setup Postgresql"
+mkdir -p /etc/postgresql
 cat <<EOF >/etc/postgresql/secrets.env
 POSTGRES_PASSWORD=${POSTGRESQL_PASSWORD}
 EOF
@@ -55,6 +56,7 @@ echo "=== Setup Redis"
 systemctl start redis
 
 echo "=== Setup Authentik Server"
+mkdir -p /etc/authentik
 cat <<EOF >/etc/authentik/secrets.env
 AUTHENTIK_SECRET_KEY=${AUTHENTIK_SECRET_KEY}
 AUTHENTIK_EMAIL__PASSWORD=${AUTHENTIK_EMAIL__PASSWORD}
@@ -66,6 +68,7 @@ echo "=== Setup Authentik Worker"
 systemctl start authentik-worker
 
 echo "=== Setup Authentik LDAP"
+mkdir -p /etc/authentik
 cat <<EOF >/etc/authentik/ldap.secrets.env
 AUTHENTIK_TOKEN=${AUTHENTIK_LDAP_TOKEN}
 EOF
