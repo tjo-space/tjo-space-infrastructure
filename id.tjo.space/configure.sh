@@ -20,17 +20,6 @@ else
   git reset --hard origin/main
 fi
 
-echo "=== Configure Firewall"
-ufw default deny incoming
-ufw default allow outgoing
-ufw default allow forward
-
-ufw allow 22/tcp  # SSH
-ufw allow 80/tcp  # HTTP
-ufw allow 443/tcp # HTTPS
-
-#ufw --force enable
-
 echo "=== Copy Configuration Files"
 rsync -a id.tjo.space/containers/ /etc/containers/systemd/
 rsync -a id.tjo.space/configs/ /etc/
