@@ -2,13 +2,14 @@
 Description=A Caddy Container
 
 [Container]
-Image=docker.io/caddy:2.9
+Image=docker.io/caddy:2
 PublishPort=[::]:443:443
 PublishPort=0.0.0.0:443:443
 PublishPort=[::]:80:80
 PublishPort=0.0.0.0:80:80
 Volume=/etc/caddy:/etc/caddy:ro
 Network=main.network
+AutoUpdate=registry
 
 [Service]
 Restart=always

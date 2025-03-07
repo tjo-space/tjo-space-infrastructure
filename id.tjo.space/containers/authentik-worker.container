@@ -11,6 +11,7 @@ Volume=/srv/authentik/certs:/certs
 Volume=/srv/authentik/custom-templates:/custom-templates
 Network=main.network
 User=1200
+AutoUpdate=registry
 
 [Service]
 Restart=always

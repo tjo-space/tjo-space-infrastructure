@@ -8,6 +8,9 @@ EnvironmentFile=/etc/postgresql/secrets.env
 Environment=POSTGRES_USER=id.tjo.space
 Environment=POSTGRES_DB=id.tjo.space
 Network=main.network
+AutoUpdate=registry
+HealthCmd=pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}
+HealthStartPeriod=20s
 
 [Service]
 Restart=always
