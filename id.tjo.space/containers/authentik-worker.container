@@ -10,6 +10,7 @@ Volume=/srv/authentik/media:/media
 Volume=/srv/authentik/certs:/certs
 Volume=/srv/authentik/custom-templates:/custom-templates
 Network=main.network
+User=1200
 
 [Service]
 Restart=always

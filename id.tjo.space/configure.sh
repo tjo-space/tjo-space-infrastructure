@@ -29,7 +29,7 @@ ufw allow 22/tcp  # SSH
 ufw allow 80/tcp  # HTTP
 ufw allow 443/tcp # HTTPS
 
-ufw --force enable
+#ufw --force enable
 
 echo "=== Copy Configuration Files"
 rsync -a id.tjo.space/containers/ /etc/containers/systemd/
@@ -42,7 +42,10 @@ set -a && source id.tjo.space/secrets.env && set +a
 
 echo "=== Prepare srv directories"
 mkdir -p /srv/authentik/{media,certs,custom-templates}
+chown -R 1200:1200 /srv/authentik
+
 mkdir -p /srv/postgresql/data
+chown -R 1100:1100 /srv/postgresql
 
 echo "=== Setup Caddy"
 systemctl restart caddy
