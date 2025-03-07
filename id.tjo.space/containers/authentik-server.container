@@ -2,7 +2,7 @@
 Description=An Authentik Server
 
 [Container]
-Image=ghcr.io/goauthentik/authentik:2025.2.1
+Image=ghcr.io/goauthentik/server:2025.2.1
 EnvironmentFile=/etc/authentik/authentik.env
 EnvironmentFile=/etc/authentik/secrets.env
 Volume=/srv/authentik/media:/media
