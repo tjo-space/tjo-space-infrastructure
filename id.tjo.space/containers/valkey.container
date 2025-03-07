@@ -3,6 +3,7 @@ Description=A Valkey Container
 
 [Container]
 Image=docker.io/valkey/valkey:8
+Network=main.network
 
 [Service]
 Restart=always

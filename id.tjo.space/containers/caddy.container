@@ -6,6 +6,7 @@ Image=docker.io/caddy:2.9
 PublishPort=443:443
 PublishPort=80:80
 Volume=/etc/caddy:/etc/caddy:ro
+Network=main.network
 
 [Service]
 Restart=always

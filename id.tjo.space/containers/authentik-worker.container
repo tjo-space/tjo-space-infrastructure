@@ -9,6 +9,7 @@ EnvironmentFile=/etc/authentik/secrets.env
 Volume=/srv/authentik/media:/media
 Volume=/srv/authentik/certs:/certs
 Volume=/srv/authentik/custom-templates:/custom-templates
+Network=main.network
 
 [Service]
 Restart=always

@@ -7,6 +7,7 @@ EnvironmentFile=/etc/authentik/authentik.env
 EnvironmentFile=/etc/authentik/secrets.env
 Volume=/srv/authentik/media:/media
 Volume=/srv/authentik/custom-templates:/custom-templates
+Network=main.network
 
 [Service]
 Restart=always

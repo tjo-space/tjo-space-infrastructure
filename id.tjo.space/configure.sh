@@ -70,10 +70,3 @@ systemctl start authentik-server
 
 echo "=== Setup Authentik Worker"
 systemctl start authentik-worker
-
-echo "=== Setup Authentik LDAP"
-mkdir -p /etc/authentik
-cat <<EOF >/etc/authentik/ldap.secrets.env
-AUTHENTIK_TOKEN=${AUTHENTIK_LDAP_TOKEN}
-EOF
-systemctl start authentik-ldap
