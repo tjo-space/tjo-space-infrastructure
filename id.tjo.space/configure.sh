@@ -42,6 +42,10 @@ echo "=== Read Secrets"
 age -d -i /etc/age/key.txt id.tjo.space/secrets.env.encrypted >id.tjo.space/secrets.env
 set -a && source id.tjo.space/secrets.env && set +a
 
+echo "=== Prepare srv directories"
+mkdir -p /srv/authentik/{media,certs,custom-templates}
+mkdir -p /srv/postgresql/data
+
 echo "=== Setup Caddy"
 systemctl start caddy
 
