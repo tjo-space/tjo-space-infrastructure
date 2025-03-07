@@ -56,8 +56,8 @@ POSTGRES_PASSWORD=${POSTGRESQL_PASSWORD}
 EOF
 systemctl start postgresql
 
-echo "=== Setup Redis"
-systemctl start redis
+echo "=== Setup Valkey"
+systemctl start valkey
 
 echo "=== Setup Authentik Server"
 mkdir -p /etc/authentik
