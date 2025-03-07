@@ -1,6 +1,2 @@
 [Network]
 IPv6=true
-#Gateway=fd00::1:8:1
-#Subnet=fd00::1:8:0/112
-#Gateway=10.90.0.1
-#Subnet=10.90.0.0/16

@@ -21,15 +21,12 @@ else
 fi
 
 echo "=== Configure Firewall"
-ufw --force reset
-
 ufw default deny incoming
 ufw default allow outgoing
 
 ufw allow 22/tcp  # SSH
 ufw allow 80/tcp  # HTTP
 ufw allow 443/tcp # HTTPS
-ufw allow 636/tcp # LDAPS
 
 ufw --force enable
 
