@@ -45,7 +45,6 @@ mkdir -p /srv/authentik/{media,certs,custom-templates}
 chown -R 1200:1200 /srv/authentik
 
 mkdir -p /srv/postgresql/data
-chown -R 1100:1100 /srv/postgresql
 
 echo "=== Setup Caddy"
 systemctl restart caddy
