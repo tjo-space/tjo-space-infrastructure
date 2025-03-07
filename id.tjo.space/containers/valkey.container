@@ -4,6 +4,7 @@ Description=A Valkey Container
 [Container]
 Image=docker.io/valkey/valkey:8
 Network=main.network
+NetworkAlias=postgresql
 
 [Service]
 Restart=always

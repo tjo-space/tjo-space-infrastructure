@@ -8,6 +8,7 @@ EnvironmentFile=/etc/postgresql/secrets.env
 Environment=POSTGRES_USER=id.tjo.space
 Environment=POSTGRES_DB=id.tjo.space
 Network=main.network
+NetworkAlias=postgresql
 
 [Service]
 Restart=always
