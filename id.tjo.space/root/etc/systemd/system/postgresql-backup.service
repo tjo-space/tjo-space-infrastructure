@@ -1,0 +1,9 @@
+[Unit]
+Description=Backup PostgreSQL databases
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/postgresql-backup.sh
+EnvironmentFile=/etc/postgresql/secrets.env
+EnvironmentFile=/etc/postgresql/postgresql.env
+Environment=BACKUP_DIR=/srv/postgresql/backups
