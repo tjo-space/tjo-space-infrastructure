@@ -28,18 +28,16 @@ echo "=== Prepare srv directories"
 mkdir -p /srv/authentik/{media,certs,custom-templates}
 chown -R 1200:1200 /srv/authentik
 
-mkdir -p /srv/postgresql/data
+mkdir -p /srv/postgresql/{data,backups}
 
 echo "=== Read Secrets"
 age -d -i /etc/age/key.txt id.tjo.space/secrets.env.encrypted >id.tjo.space/secrets.env
 set -a && source id.tjo.space/secrets.env && set +a
 
 echo "=== Prepare Configurations"
-mkdir -p /etc/postgresql
 cat <<EOF >/etc/postgresql/secrets.env
 POSTGRES_PASSWORD=${POSTGRESQL_PASSWORD}
 EOF
-mkdir -p /etc/authentik
 cat <<EOF >/etc/authentik/secrets.env
 AUTHENTIK_SECRET_KEY=${AUTHENTIK_SECRET_KEY}
 AUTHENTIK_EMAIL__PASSWORD=${AUTHENTIK_EMAIL__PASSWORD}
@@ -51,12 +49,12 @@ systemctl restart caddy
 
 echo "=== Setup Postgresql"
 systemctl restart postgresql
+systemctl start postgresql-backup.timer
 
 echo "=== Setup Valkey"
 systemctl restart valkey
 
 echo "=== Setup Authentik Server"
-
 systemctl restart authentik-server
 
 echo "=== Setup Authentik Worker"
