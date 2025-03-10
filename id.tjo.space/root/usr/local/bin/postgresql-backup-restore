@@ -8,7 +8,8 @@ set -euo pipefail
 #
 # Example:
 #
-#   cat /path/to/backup.sql | postgresql-backup-restore
+#   cat /path/to/backup | postgresql-backup-restore
+#
 
 echo "=== Reading Configuration"
 set -a && source /etc/postgresql/postgresql.env && set +a
