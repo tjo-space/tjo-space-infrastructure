@@ -1,6 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 
+# Restoring PostgreSQL Database
+#
+# The backup file from pg_dump (with format=custom)
+# must be provided via stdin.
+#
+# Example:
+#
+#   cat /path/to/backup.sql | postgresql-backup-restore
+
 echo "=== Reading Configuration"
 set -a && source /etc/postgresql/postgresql.env && set +a
 
