@@ -3,9 +3,7 @@ default:
 
 secrets-encrypt:
   #!/usr/bin/env sh
-  age --encrypt \
-    -r age1cl3d4wtrrqrgldmrzpu53q2mk60r7hrhrymsrwss8s57z4mdv9fst4a55h \
-    -r age1aqm46gj5k583p4uj3y3lz26lxvaamg93qry5w7y8z0qaczr4y4psc0altw \
+  age --encrypt -R {{source_directory()}}/secrets.keys \
     secrets.env > secrets.env.encrypted
 
 secrets-decrypt:
