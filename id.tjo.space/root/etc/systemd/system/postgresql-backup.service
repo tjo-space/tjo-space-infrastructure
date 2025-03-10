@@ -9,4 +9,4 @@ Environment=BACKUP_DIR=/srv/postgresql/backups
 Environment=POSTGRES_HOST=systemd-postgresql
 
 ExecStartPre=/usr/bin/mkdir -p $BACKUP_DIR
-ExecStart=/usr/bin/podman run --name=systemd-%N --replace --rm --network systemd-main -v ${BACKUP_DIR}:/backups -e PGPASSWORD=$POSTGRES_PASSWORD docker.io/library/postgres:17.4 pg_dumpall -U $POSTGRES_USER -h $POSTGRES_HOST -f /backups/$CURRENT_DATETIME.sql
+ExecStart=/usr/bin/podman run --name=systemd-%N --replace --rm --network systemd-main -v ${BACKUP_DIR}:/backups -e PGPASSWORD=${POSTGRES_PASSWORD} docker.io/library/postgres:17.4 pg_dumpall --username=${POSTGRES_USER} --host=${POSTGRES_HOST} --format=custom -f /backups/$CURRENT_DATETIME.sql
