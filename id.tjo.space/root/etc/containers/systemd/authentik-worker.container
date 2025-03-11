@@ -1,5 +1,9 @@
 [Unit]
 Description=An Authentik Worker
+Requires=postgresql.service
+After=postgresql.service
+Requires=valkey.service
+After=valkey.service
 
 [Container]
 Image=ghcr.io/goauthentik/server:2025.2.1

@@ -1,5 +1,5 @@
 next.id.tjo.space
 
-respond /tjo-space/status "OK"
+respond /healthz "OK"
 
 reverse_proxy systemd-authentik-server:9000
