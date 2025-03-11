@@ -1,11 +1,13 @@
 [Unit]
 Description=Backup PostgreSQL databases daily
+Requires=postgresql.service
+After=postgresql.service
 
 [Timer]
 OnCalendar=daily
 AccuracySec=1h
 Persistent=true
-RandomizedDelaySec=100min
+RandomizedDelaySec=4h
 
 [Install]
 WantedBy=timers.target
