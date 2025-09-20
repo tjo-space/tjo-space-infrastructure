@@ -1,10 +1,3 @@
-# ---> Dot ENV
-.env
-
-# ---> Secrets
-**/secrets.env
-!**/secrets.env.encrypted
-
 # ---> Terraform
 # Local .terraform directories
 **/.terraform/*
@@ -14,6 +7,12 @@
 *.tfstate
 *.tfstate.*
 !*.tfstate.encrypted
+!*.tfstate.sha256sum
+
+# .tfvars files
+*.tfvars
+*.tfvars.*
+!terraform.tfvars
 
 # Crash log files
 crash.log
@@ -24,3 +23,14 @@ crash.*.log
 terraform.rc
 .tofurc
 tofu.rc
+
+# Sensitive secrets documentation
+SECRETS.md
+
+# ENV
+.env
+admin.*config
+secrets.env
+
+# Nix
+**/result

@@ -1,0 +1,9 @@
+default:
+  @just --list
+
+apply:
+  tofu init
+  tofu apply
+
+destroy:
+  tofu  destroy

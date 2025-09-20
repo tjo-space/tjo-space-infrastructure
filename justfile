@@ -3,7 +3,14 @@ set shell := ["devbox", "run"]
 # Load dotenv
 set dotenv-load
 
-mod id 'id.tjo.space'
+export SOPS_AGE_KEY_FILE := if os() == "linux" {`echo "$HOME/.config/sops/age/keys.txt"`} else { `echo "$HOME/Library/Application Support/sops/age/keys.txt"` }
+
+mod dns 'dns'
+
+import 'secrets.justfile'
+
+post-pull: dot-env-decrypt secrets-md-decrypt tofu-state-decrypt
+pre-commit: dot-env-encrypt secrets-md-encrypt tofu-state-encrypt lint format
 
 default:
   @just --list
@@ -15,41 +22,3 @@ lint:
 format:
   @tofu fmt -recursive .
   @tflint --recursive
-
-dot-env-encrypt:
-  sops \
-    --encrypt \
-    --input-type=dotenv \
-    --output-type=dotenv \
-    .env > .env.encrypted
-
-dot-env-decrypt:
-  sops \
-    --decrypt \
-    --input-type=dotenv \
-    --output-type=dotenv \
-    .env.encrypted > .env
-
-tofu-state-encrypt:
-  #!/bin/bash
-  for file in $(find -name tofu.tfstate -o -name terraform.tfstate)
-  do
-    echo "Encrypting $file"
-    sops \
-      --encrypt \
-      --input-type=json \
-      --output-type=json \
-      $file > ${file}.encrypted
-  done
-
-tofu-state-decrypt:
-  #!/bin/bash
-  for file in $(find -name tofu.tfstate.encrypted -o -name terraform.tfstate.encrypted)
-  do
-    echo "Decrypting $file"
-    sops \
-      --decrypt \
-      --input-type=json \
-      --output-type=json \
-      $file > ${file%.encrypted}
-  done
