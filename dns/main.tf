@@ -76,12 +76,6 @@ locals {
     { type = "AAAA", subdomain = "batuu.system", records = ["fd7a:115c:a1e0::b01:af6a"] },
     { type = "AAAA", subdomain = "jakku.system", records = ["fd7a:115c:a1e0::2b01:f033"] },
     { type = "AAAA", subdomain = "nevaroo.system", records = ["fd7a:115c:a1e0::6501:7e50"] },
-    { type = "A", subdomain = "internal-batuu.system", records = ["10.0.4.1"] },
-    { type = "A", subdomain = "internal-jakku.system", records = ["10.0.4.2"] },
-    { type = "A", subdomain = "internal-nevaroo.system", records = ["10.0.4.3"] },
-    { type = "AAAA", subdomain = "internal-batuu.system", records = ["fd74:6a6f::be24:11ff:fec0:96a6"] },
-    { type = "AAAA", subdomain = "internal-jakku.system", records = ["fd74:6a6f::be24:11ff:feda:f12b"] },
-    { type = "AAAA", subdomain = "internal-nevaroo.system", records = ["fd74:6a6f::be24:11ff:feb6:43af"] },
   ]
 }
 resource "desec_rrset" "records" {
