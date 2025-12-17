@@ -1,0 +1,33 @@
+default:
+  @just --list
+
+apply:
+  #!/usr/bin/env sh
+  cd {{source_directory()}}/terraform
+  tofu init -upgrade
+  tofu apply
+
+destroy:
+  #!/usr/bin/env sh
+  cd {{source_directory()}}/terraform
+  tofu  destroy
+
+configure node:
+  #!/usr/bin/env sh
+  cd {{source_directory()}}/ansible
+  export VERSION=$(git describe --tags --always --dirty)
+  ansible-playbook \
+    --extra-vars "@{{source_directory()}}/../global.yaml" \
+    --extra-vars "tjo_cloud_version=${VERSION}" \
+    --inventory inventory.yaml \
+    playbook.yaml --limit {{node}}
+
+configure-all:
+  #!/usr/bin/env sh
+  cd {{source_directory()}}/ansible
+  export VERSION=$(git describe --tags --always --dirty)
+  ansible-playbook \
+    --extra-vars "@{{source_directory()}}/../global.yaml" \
+    --extra-vars "tjo_cloud_version=${VERSION}" \
+    --inventory inventory.yaml \
+    playbook.yaml

@@ -1,0 +1,18 @@
+tjo_space_networks:
+  # tjo.cloud
+  - "10.0.0.0/10"
+  - "fd74:6a6f::/32"
+  # k8s.tjo.cloud
+  - "10.100.0.0/16"
+  - "fd9b:7c3d:7f6a::/48"
+
+tjo_space_admin_ssh_keys:
+  # TINE
+  tine+pc@tjo.space: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICXAlzwziqfUUb2qmFwNF/nrBYc5MNT1MMOx81ohBmB+"
+  tine+mobile@tjo.space: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAdPg/nG/Qzk110SBukHHEDqH6/3IJHsIKKHWTrqjaOh"
+  tine+ipad@tjo.cloud: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHrX2u82zWpVhjWng1cR4Kj76SajLJQ/Nmwd2GPaJpt1"
+  tine+mac@tjo.space: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAdKdeca1pqJfT5SbvbOVxjvGXdIny29gqRrQbrNht3m"
+  # JAKOB
+  jakob.jozelj+mac@protonmail.com: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDAtgxoRU+8RGLPD0MOx7/2n+Gb161knPL1RQ2hPGMT/7ZJmvoYPpehLYR5mowyz2M1TViShkR/4Eyubkfx907bJ5zT/CV17qu1MOV3Dv75wSobSTgCLvU3LlqtKSCE9z1YjLEqRE+HmKpXsuzfzFCJiw9X50F0NhN7a7bKlC3USAEgtSwIPNUB1/dB8iQWEosKEwrBQ5S+OnOVdjjwo/eNJ/BI7W6B+5fnO/eNI0vT6D1J4xCgQlbxtbFGY6ob9UMO+yj+F4QsLNjYO8Vd/0CvUlIFBwI99AwsEIjyz2BNt+SOF6C8Jzb/orK87lxZ5tlhu59k6Vpy6rLTOiV7yA/B3ZI/vn4+jQilbW9oPqTk/nt8pRDsx81F9p0D/ZKIAnX0u5R3w9yLWJBkkKhOTa5IiY0kFscISdnOdMgj+fWadPnsvMO48ufJckvujrv2H0yQ4LGMJb4AP2hxwqLefDESMd7axdBJlDWtD2rEJ+TQfNx5TM8fMSZC/BH2l6wg56s="
+  # EMERGENCY ACCESS
+  administrators+emergency@tjo.cloud: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINo2j+NZmM+qvhrMwYu3AMYT2zdJJrikDb2E3lmAsQcd"

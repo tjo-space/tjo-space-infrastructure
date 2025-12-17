@@ -1,0 +1,23 @@
+- name: UFW - Install
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+
+- name: UFW - Allow S3 API, S3 WEB, RPC and ADMIN ports
+  community.general.ufw:
+    rule: allow
+    port: '{{ item[0] }}'
+    proto: tcp
+    src: '{{ item[1] }}'
+  loop: "{{ ['3900', '3902', '3901', '3903'] | product(tjo_cloud_networks) | list }}"
+
+- name: UFW - Allow SSH
+  community.general.ufw:
+    rule: allow
+    port: '2222'
+    proto: tcp
+
+- name: UFW - Enable and deny by default
+  community.general.ufw:
+    state: enabled
+    default: deny

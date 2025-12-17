@@ -1,0 +1,42 @@
+{
+	on_demand_tls {
+		ask http://localhost:3903/check
+	}
+	metrics {
+		per_host
+	}
+}
+
+##
+# Buckets as static websites
+##
+https://, *.web.s3.tjo.cloud {
+	tls {
+		on_demand
+	}
+
+	reverse_proxy localhost:3902 {
+		health_uri /health
+		health_port 3903
+	}
+}
+
+##
+# API
+##
+api.s3.tjo.cloud {
+	reverse_proxy localhost:3900 {
+		health_uri /health
+		health_port 3903
+	}
+}
+
+##
+# MANAGEMENT
+##
+admin.s3.tjo.cloud {
+	reverse_proxy localhost:3903 {
+		health_uri /health
+		health_port 3903
+	}
+}

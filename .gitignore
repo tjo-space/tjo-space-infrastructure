@@ -27,6 +27,10 @@ tofu.rc
 # Sensitive secrets documentation
 SECRETS.md
 
+# Ansible
+vars.secrets.yaml
+vars.*.secrets.yaml
+
 # ENV
 .env
 admin.*config
@@ -34,3 +38,6 @@ secrets.env
 
 # Nix
 **/result
+
+# Shared
+shared/

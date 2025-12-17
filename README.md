@@ -14,7 +14,6 @@ that require special hardware (video cards etc.).
  - [chat.tjo.space](./services/chat.tjo.space)
  - [cloud.tjo.space](./services/cloud.tjo.space)
  - [code.tjo.space](./services/code.tjo.space)
- - [mail.tjo.space](./services/mail.tjo.space)
  - [paperless.tjo.space](./services/paperless.tjo.space)
  - [penpot.tjo.space](./services/penpot.tjo.space)
  - [rss.tjo.space](./services/rss.tjo.space)

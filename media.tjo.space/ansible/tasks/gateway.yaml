@@ -1,0 +1,42 @@
+- name: Gateway - Firewall
+  community.general.ufw:
+    rule: allow
+    port: '{{ item }}'
+    proto: tcp
+  loop:
+    - '80'
+    - '443'
+    - '9993' # Zerotier
+
+- name: Gateway - Install Zerotier
+  ansible.builtin.include_role:
+    name: zerotier
+
+- name: Gateway - Configure Zerotier
+  ansible.builtin.shell: |
+    systemctl stop zerotier-one
+    echo "{{ tjo_cloud_metadata.zerotier.public_key }}" >/var/lib/zerotier-one/identity.public
+    echo "{{ tjo_cloud_metadata.zerotier.private_key }}" >/var/lib/zerotier-one/identity.secret
+    systemctl start zerotier-one
+    sleep 5
+    zerotier-cli join b6079f73c6379990
+  args:
+    creates: /var/lib/zerotier-one/networks.d/b6079f73c6379990.conf
+
+- name: Gateway - Refresh facts
+  ansible.builtin.setup:
+    gather_subset:
+      - network
+
+- name: Gateway - Install Caddy
+  ansible.builtin.include_role:
+    name: caddy
+
+- name: Gateway - Configure Caddy
+  ansible.builtin.template:
+    src: root/etc/caddy/Caddyfile
+    dest: /etc/caddy/Caddyfile
+    mode: '0600'
+    owner: "caddy"
+    group: "caddy"
+  notify: Restart caddy

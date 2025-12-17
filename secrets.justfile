@@ -5,7 +5,7 @@ _encrypt path:
   file="{{path}}"
 
   echo "Encrypting ${file}"
-  if cat ${file}.sha256sum | $SHA256SUM --check --status
+  if cat ${file}.sha256sum | $SHA256SUM --check --status && ! [ -n "$FORCE_ENCRYPTION" ]
   then
     echo " - matches existing hash, skipping"
   else
@@ -30,8 +30,6 @@ secrets-md-encrypt:
 secrets-md-decrypt:
   @just _decrypt SECRETS.md
 
-# We do not use sops as state files can be large.
-# And we want to use gzip on them to make them smaller (from 17MB to 4MB).
 tofu-state-encrypt:
   #!/usr/bin/env bash
   for file in $(find . -name tofu.tfstate -o -name terraform.tfstate)
@@ -39,12 +37,24 @@ tofu-state-encrypt:
     just _encrypt $file
   done
 
-# We do not use sops as state files can be large.
-# And we want to use gzip on them to make them smaller (from 17MB to 4MB).
 [confirm('Are you sure? This will overwrite your local state files! Ireversable operation!')]
 tofu-state-decrypt:
   #!/usr/bin/env bash
   for file in $(find . -name tofu.tfstate.encrypted -o -name terraform.tfstate.encrypted)
+  do
+    just _decrypt ${file%.encrypted}
+  done
+
+ansible-secrets-encrypt:
+  #!/usr/bin/env bash
+  for file in $(find . -name vars.secrets.yaml -o -name "vars.*.secrets.yaml")
+  do
+    just _encrypt $file
+  done
+
+ansible-secrets-decrypt:
+  #!/usr/bin/env bash
+  for file in $(find . -name vars.secrets.yaml.encrypted -o -name "vars.*.secrets.yaml")
   do
     just _decrypt ${file%.encrypted}
   done

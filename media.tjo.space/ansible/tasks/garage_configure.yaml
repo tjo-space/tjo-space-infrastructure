@@ -1,0 +1,66 @@
+- name: Template garage config file
+  ansible.builtin.template:
+    src: root/etc/garage.toml.j2
+    dest: /etc/garage.toml
+    mode: '0600'
+    owner: "{{ garage_user }}"
+    group: "{{ garage_group }}"
+  notify: Restart garage
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
+- name: Get node id
+  ansible.builtin.shell: |
+    garage node id -q
+  changed_when: false
+  register: garage_node_id
+
+- name: Save garage node id
+  ansible.builtin.set_fact:
+    garage_node_id: "{{ garage_node_id.stdout }}"
+    garage_node_ip: "{{ ansible_all_ipv4_addresses | select('match', '^10.*') | first }}"
+
+- name: Loop connect garage nodes
+  ansible.builtin.command:
+    cmd: |
+      garage node connect {{ hostvars[item]['garage_node_id'] }}@{{ hostvars[item]['garage_node_ip'] }}:3901
+  loop: "{{ ansible_play_hosts | reject('equalto', inventory_hostname) }}"
+  delegate_to: "{{ ansible_play_hosts[0] }}"
+  changed_when: false
+  run_once: true
+  when: ansible_play_hosts | length > 1
+
+- name: Assign layout - Store
+  ansible.builtin.command:
+    cmd: "garage layout assign {{ garage_node_id.split('@')[0] }} -z {{ garage_zone }} -c {{ garage_size }}"
+  changed_when: false
+  delegate_to: "{{ ansible_play_hosts[0] }}"
+  when: garage_kind == "store"
+
+- name: Assign layout - Gateway
+  ansible.builtin.command:
+    cmd: "garage layout assign {{ garage_node_id.split('@')[0] }} --gateway -z {{ garage_zone }}"
+  changed_when: false
+  delegate_to: "{{ ansible_play_hosts[0] }}"
+  when: garage_kind == "gateway"
+
+- name: Get current layout version number
+  ansible.builtin.uri:
+    url: "http://127.0.0.1:3903/v1/layout"
+    return_content: true
+    headers:
+      Authorization: "Bearer {{ garage_admin_token }}"
+  register: layout_info
+
+- name: Set layout version
+  ansible.builtin.set_fact:
+    new_layout_version: "{{ layout_info.json.version | int + 1 }}"
+  run_once: true
+  delegate_to: "{{ ansible_play_hosts[0] }}"
+
+- name: Apply Layout
+  ansible.builtin.command: "garage layout apply --version {{ new_layout_version }}"
+  changed_when: false
+  run_once: true
+  delegate_to: "{{ ansible_play_hosts[0] }}"
