@@ -1,5 +1,5 @@
 ---
-- name: Configure s3.tjo.cloud
+- name: Configure media.tjo.space
   hosts: all
 
   vars_files:
@@ -7,47 +7,15 @@
     - vars.terraform.yaml
     - vars.secrets.yaml
 
-  handlers:
-    - name: Restart garage
-      ansible.builtin.systemd:
-        name: garage
-        state: restarted
-    - name: Restart systemd-resolved
-      ansible.builtin.systemd:
-        name: systemd-resolved
-        state: restarted
+  handlers: []
 
   tasks:
-    - name: Configure authorized keys
-      ansible.posix.authorized_key:
-        user: bine
-        state: present
-        exclusive: true
-        key: "{{ lookup('ansible.builtin.dict', tjo_cloud_admin_ssh_keys) | map(attribute='value') | join('\n')}}"
-
-    - name: Fetch metadata
-      ansible.builtin.shell: |
-        cat /etc/tjo.cloud/meta.json
-      register: tjo_cloud_metadata_raw
-
-    - name: Save metadata as fact
-      set_fact:
-        tjo_cloud_metadata: "{{ tjo_cloud_metadata_raw.stdout | from_json }}"
-
-    - name: Write version.txt
-      ansible.builtin.copy:
-        content: "{{ tjo_cloud_version }}"
-        dest: /etc/tjo.cloud/version.txt
-        mode: '0444'
-
-    - name: Configure Systemd Resolved
-      ansible.builtin.template:
-        src: root/etc/systemd/resolved.conf
-        dest: /etc/systemd/resolved.conf
-        mode: '0644'
-        owner: "root"
-        group: "root"
-      notify: Restart systemd-resolved
+    - name: Run defaults
+      ansible.builtin.import_role:
+        name: default
+      vars:
+        version: "{{ tjo_space_version }}"
+        ssh_keys: "{{ tjo_space_admin_ssh_keys }}"
 
     - name: Install and Configure Observability
       ansible.builtin.import_tasks:
@@ -64,26 +32,6 @@
     - name: Flush handlers
       ansible.builtin.meta: flush_handlers
 
-    - name: Configure Gateway
+    - name: Configure Media
       ansible.builtin.include_tasks:
-        file: tasks/gateway.yaml
-      when: garage_kind == "gateway"
-
-    - name: Check garage version
-      ansible.builtin.include_tasks:
-        file: tasks/garage_check_version.yaml
-
-    - name: Upgrade Garage
-      ansible.builtin.import_tasks:
-        file: tasks/garage_install.yaml
-      when: current_garage_version is defined and current_garage_version is version(garage_version, '<')
-      throttle: 1
-
-    - name: Install Garage
-      ansible.builtin.include_tasks:
-        file: tasks/garage_install.yaml
-      when: current_garage_version is not defined or not (current_garage_version is defined and current_garage_version == garage_version)
-
-    - name: Configure Garage
-      ansible.builtin.include_tasks:
-        file: tasks/garage_configure.yaml
+        file: tasks/media.yaml

@@ -1,12 +1,4 @@
-garage_user: garage
-garage_group: garage
-garage_version: "v2.1.0"
-
-#garage_rpc_secret: ""
-#garage_admin_token: ""
-#garage_metrics_token: ""
-
-restic_backup_dir: "/srv/garage"
-restic_repository: "sftp://u409586-sub6@backup.tjo.cloud:23//home/backup"
+restic_backup_dir: "/srv/data/fast"
+restic_repository: "sftp://u409586-sub6@backup.tjo.cloud:23//home/backup/media.tjo.space"
 #restic_password: ""
 #restic_ssh_password: ""

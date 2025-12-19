@@ -9,7 +9,7 @@ locals {
   nodes_with_meta = {
     for k, v in local.nodes_with_name : k => merge(v, {
       meta = {
-        cloud_provider = v.provider
+        cloud_provider = "proxmox"
         service_name   = var.domain
         service_account = {
           username = authentik_user.service_account[k].username
@@ -89,7 +89,7 @@ module "proxmox_node" {
   metadata = each.value.meta
 
   ssh_keys = local.global.tjo_space_admin_ssh_keys
-  tags     = ["media.tjo.space"]
+  tags     = ["media.tjo.space", "tjo.space"]
 }
 
 resource "local_file" "ansible_inventory" {
@@ -101,7 +101,6 @@ resource "local_file" "ansible_inventory" {
           ansible_port   = 2222
           ansible_user   = "bine"
           ansible_become = true
-          provider       = v.provider
         }
       }
     }
@@ -112,4 +111,21 @@ resource "local_file" "ansible_inventory" {
 resource "local_file" "ansible_vars" {
   content  = yamlencode({})
   filename = "${path.module}/../ansible/vars.terraform.yaml"
+}
+
+resource "desec_rrset" "node_a" {
+  for_each = local.nodes_deployed
+  domain   = "tjo.space"
+  subname  = trimsuffix(each.value.fqdn, ".tjo.space")
+  type     = "A"
+  records  = [each.value.private_ipv4]
+  ttl      = 3600
+}
+resource "desec_rrset" "node_aaaa" {
+  for_each = local.nodes_deployed
+  domain   = "tjo.space"
+  subname  = trimsuffix(each.value.fqdn, ".tjo.space")
+  type     = "AAAA"
+  records  = [each.value.private_ipv6]
+  ttl      = 3600
 }

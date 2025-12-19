@@ -1,0 +1,12 @@
+- name: Install Caddy
+  ansible.builtin.include_role:
+    name: caddy
+
+- name: Configure Caddy
+  ansible.builtin.template:
+    src: root/etc/caddy/Caddyfile
+    dest: /etc/caddy/Caddyfile
+    mode: '0600'
+    owner: "caddy"
+    group: "caddy"
+  notify: Restart caddy
