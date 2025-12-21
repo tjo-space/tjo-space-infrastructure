@@ -1,0 +1,34 @@
+{
+  "includeCorsCredentials": false,
+  "multiserver": false,
+  "themes": [],
+  "menuLinks": [
+    {
+      "name": "Request Media",
+      "url": "https://request.media.tjo.space",
+      "icon": "search"
+    },
+    {
+      "name": "tjo.space Home",
+      "url": "https://tjo.space",
+      "icon": "home"
+    }
+  ],
+  "servers": [],
+  "plugins": [
+    "playAccessValidation/plugin",
+    "experimentalWarnings/plugin",
+    "htmlAudioPlayer/plugin",
+    "htmlVideoPlayer/plugin",
+    "photoPlayer/plugin",
+    "comicsPlayer/plugin",
+    "bookPlayer/plugin",
+    "youtubePlayer/plugin",
+    "backdropScreensaver/plugin",
+    "pdfPlayer/plugin",
+    "logoScreensaver/plugin",
+    "sessionPlayer/plugin",
+    "chromecastPlayer/plugin",
+    "syncPlay/plugin"
+  ]
+}

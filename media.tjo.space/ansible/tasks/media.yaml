@@ -1,5 +1,5 @@
 - name: Install Caddy
-  ansible.builtin.include_role:
+  ansible.builtin.import_role:
     name: caddy
 
 - name: Configure Caddy
@@ -10,3 +10,65 @@
     owner: "caddy"
     group: "caddy"
   notify: Restart caddy
+  tags: config-reload
+
+- name: Create media group
+  ansible.builtin.group:
+    name: media
+    gid: 1010
+    system: true
+    state: present
+
+- name: Create media user
+  ansible.builtin.user:
+    name: "media"
+    uid: 1010
+    group: media
+    groups:
+      - render
+    system: true
+    home: /var/lib/media
+    state: present
+
+- name: Instal podman
+  ansible.builtin.apt:
+    name: podman
+    state: present
+
+- name: Prepare directories
+  ansible.builtin.file:
+    state: directory
+    path: "{{ item }}"
+    mode: "0770"
+    owner: "media"
+    group: "media"
+  loop:
+    - "/srv/data/fast/jellyfin"
+    - "/srv/data/large/tvseries"
+    - "/srv/data/large/movies"
+    - "/srv/data/large/music"
+    - "/srv/data/large/books"
+
+- name: Copy Podman configuration
+  ansible.builtin.template:
+    src: 'root/etc/containers/systemd/{{ item }}'
+    dest: '/etc/containers/systemd/{{ item }}'
+    mode: '0600'
+    owner: root
+    group: root
+  loop:
+    - media.network
+    - jellyfin.container
+    - jellyseer.container
+    - qbitorrent.container
+    - qbitorrent-vpn.container
+    - qbitorrent-exporter.container
+    - prowlarr.container
+    - lidarr.container
+    - radarr.container
+    - sonarr.container
+    - tidarr.container
+    - bazarr.container
+    - readarr.container
+  notify: Systemd daemon-reload
+  tags: config-reload

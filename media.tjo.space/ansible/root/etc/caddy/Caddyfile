@@ -7,19 +7,22 @@
 		listener_wrappers {
 			proxy_protocol {
 				timeout 2s
-				allow  {
-					tjo_space_networks | join(' ')
+				# Using comment hack here. Otherwise caddy fmt takes the template
+				#  curly brackets and tries to "format them", which breaks things.
+				# {{ "\n allow " + (tjo_space_networks | join(' ')) }}
+				fallback_policy reject
+			}
+			tls {
+				issuer acme {
+					disable_http_challenge
 				}
 			}
-			fallback_policy reject
 		}
-		tls
 	}
-}
 }
 
 ng.media.tjo.space {
-	reverse_proxy localhost:3000
+	reverse_proxy localhost:8096
 }
 
 request.ng.media.tjo.space {

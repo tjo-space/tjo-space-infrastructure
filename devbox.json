@@ -23,7 +23,8 @@
     },
     "ansible":       "latest",
     "grafana-alloy": "latest",
-    "caddy":         "latest"
+    "caddy":         "latest",
+    "buildah":       "latest"
   },
   "env": {
     "TFENV_AUTO_INSTALL":        "true",

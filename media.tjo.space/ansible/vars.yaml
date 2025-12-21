@@ -1,4 +1,4 @@
 restic_backup_dir: "/srv/data/fast"
-restic_repository: "sftp://u409586-sub6@backup.tjo.cloud:23//home/backup/media.tjo.space"
+restic_repository: "sftp://u409586-sub8@backup.tjo.cloud:23//home/backup/media.tjo.space"
 #restic_password: ""
 #restic_ssh_password: ""

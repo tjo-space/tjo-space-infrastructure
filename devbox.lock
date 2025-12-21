@@ -161,6 +161,74 @@
         }
       }
     },
+    "buildah@latest": {
+      "last_modified": "2025-12-11T04:04:52Z",
+      "resolved": "github:NixOS/nixpkgs/5d6bdbddb4695a62f0d00a3620b37a15275a5093#buildah",
+      "source": "devbox-search",
+      "version": "1.42.2",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/0jcvs4j39srsh8wffdhphn4yd7i7dh6v-buildah-wrapper-1.42.2",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/hgzy2s25sfzaz0pp0hjp563gljwpqggh-buildah-wrapper-1.42.2-man",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/0jcvs4j39srsh8wffdhphn4yd7i7dh6v-buildah-wrapper-1.42.2"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/9xrwmac86cqig82nhdz7sdiqqa0a9d7v-buildah-wrapper-1.42.2",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/wcizgkz8r5rd8fj0xwfwwlbpd34k3h7k-buildah-wrapper-1.42.2-man",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/9xrwmac86cqig82nhdz7sdiqqa0a9d7v-buildah-wrapper-1.42.2"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/divp1f0pjvi2jfrggm8z7vhwlcp5p213-buildah-wrapper-1.42.2",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/c901ywvxlxaahbmlsyg8bvfkzdsb6zw9-buildah-wrapper-1.42.2-man",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/divp1f0pjvi2jfrggm8z7vhwlcp5p213-buildah-wrapper-1.42.2"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/y4fl2frw9psc4k3bzcip71dqbnzx5rwp-buildah-wrapper-1.42.2",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/1i9y4ib03jqh1zpfz1f0xnar03prg29c-buildah-wrapper-1.42.2-man",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/y4fl2frw9psc4k3bzcip71dqbnzx5rwp-buildah-wrapper-1.42.2"
+        }
+      }
+    },
     "caddy@latest": {
       "last_modified": "2025-11-26T06:22:50Z",
       "plugin_version": "0.0.3",

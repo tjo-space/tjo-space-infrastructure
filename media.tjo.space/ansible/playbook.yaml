@@ -33,5 +33,5 @@
       ansible.builtin.meta: flush_handlers
 
     - name: Configure Media
-      ansible.builtin.include_tasks:
+      ansible.builtin.import_tasks:
         file: tasks/media.yaml

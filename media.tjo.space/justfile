@@ -12,22 +12,40 @@ destroy:
   cd {{source_directory()}}/terraform
   tofu  destroy
 
-configure node:
+configure node tag="":
   #!/usr/bin/env sh
   cd {{source_directory()}}/ansible
   export VERSION=$(git describe --tags --always --dirty)
+  TAGS=""; if [ -n "{{tag}}" ]; then TAGS="--tags {{tag}}"; fi
   ansible-playbook \
     --extra-vars "@{{source_directory()}}/../global.yaml" \
-    --extra-vars "tjo_space_version=${VERSION}" \
+    --extra-vars "tjo_cloud_version=${VERSION}" \
     --inventory inventory.yaml \
+    $TAGS \
     playbook.yaml --limit {{node}}
 
-configure-all:
+configure-all tag="":
   #!/usr/bin/env sh
   cd {{source_directory()}}/ansible
   export VERSION=$(git describe --tags --always --dirty)
+  TAGS=""; if [ -n "{{tag}}" ]; then TAGS="--tags {{tag}}"; fi
   ansible-playbook \
     --extra-vars "@{{source_directory()}}/../global.yaml" \
-    --extra-vars "tjo_space_version=${VERSION}" \
+    --extra-vars "tjo_cloud_version=${VERSION}" \
     --inventory inventory.yaml \
+    $TAGS \
     playbook.yaml
+
+ssh node:
+  ssh bine@{{node}}.media.tjo.space -4 -p 2222
+
+build:
+  #!/usr/bin/env sh
+  cd {{source_directory()}}/build
+
+  JELLYFIN_VERSION=10.11.3
+  buildah build --file "jellyfin.Containerfile" \
+    --build-arg VERSION=${JELLYFIN_VERSION} \
+    --tag code.tjo.space/tjo-space/jellyfin:${JELLYFIN_VERSION} \
+    .
+  buildah push code.tjo.space/tjo-space/jellyfin:${JELLYFIN_VERSION}
