@@ -11,5 +11,8 @@ nodes = {
 
     data_large_storage = "local-hdd"
     data_large_size    = 100
+
+    data_ephemeral_storage = "local-hdd"
+    data_ephemeral_size    = 101
   }
 }

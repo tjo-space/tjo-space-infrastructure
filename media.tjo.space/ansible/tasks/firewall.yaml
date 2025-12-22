@@ -1,23 +1,30 @@
-- name: UFW - Install
-  ansible.builtin.apt:
-    name: ufw
-    state: present
-
-- name: UFW - HTTP and HTTPS
-  community.general.ufw:
-    rule: allow
-    port: '{{ item[0] }}'
-    proto: tcp
-    src: '{{ item[1] }}'
-  loop: "{{ ['80', '443'] | product(tjo_space_networks) | list }}"
-
-- name: UFW - Allow SSH
-  community.general.ufw:
-    rule: allow
-    port: '2222'
-    proto: tcp
-
-- name: UFW - Enable and deny by default
-  community.general.ufw:
+- name: FIREWALL - Define internal zone
+  ansible.posix.firewalld:
+    source: '{{ item }}'
+    zone: internal
+    permanent: true
+    immediate: true
     state: enabled
-    default: deny
+  loop: "{{ tjo_space_networks }}"
+  tags: firewall
+
+- name: FIREWALL - HTTP and HTTPS
+  ansible.posix.firewalld:
+    port: '{{ item }}'
+    zone: internal
+    permanent: true
+    immediate: true
+    state: enabled
+  loop:
+    - "80/tcp"
+    - "443/tcp"
+  tags: firewall
+
+- name: FIREWALL - Allow SSH
+  ansible.posix.firewalld:
+    service: ssh
+    zone: internal
+    permanent: true
+    immediate: true
+    state: enabled
+  tags: firewall

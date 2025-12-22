@@ -1,0 +1,25 @@
+[Unit]
+Description=Qbittorrent VPN container
+
+[Container]
+ContainerName=qbittorrent-vpn
+Image=docker.io/qmcgaw/gluetun:v3.40.3@sha256:ab33df0037b13d2e5185a736ee4724e02843e886b91c88cf293ddd691307edd2
+Network=media.network
+AddCapability=NET_ADMIN
+AddDevice=-/dev/net/tun:rw
+Environment=VPN_SERVICE_PROVIDER=mullvad
+Environment=VPN_TYPE=wireguard
+Environment=WIREGUARD_PRIVATE_KEY={{ qbittorrent_vpn_wireguard_private_key }}
+Environment=WIREGUARD_ADDRESSES={{ qbittorrent_vpn_wireguard_addresses }}
+Environment=SERVER_COUNTRIES=Slovenia,Croatia,Serbia
+# Qbittorrent Web UI
+PublishPort=127.0.0.1:8080:8080
+# Qbittorrent Exporter
+PublishPort=127.0.0.1:9200:9200
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

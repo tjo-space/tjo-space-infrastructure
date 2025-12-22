@@ -21,42 +21,75 @@
 	}
 }
 
+(auth) {
+	# directive execution order is only as stated if enclosed with route.
+	route {
+		# always forward outpost path to actual outpost
+		reverse_proxy /outpost.goauthentik.io/* http://127.0.0.1:9000 {
+			header_up Host {http.reverse_proxy.upstream.host}
+		}
+
+		# forward authentication to outpost
+		forward_auth http://127.0.0.1:9000 {
+			uri /outpost.goauthentik.io/auth/caddy
+
+			# capitalization of the headers is important, otherwise they will be empty
+			copy_headers X-Authentik-Username X-Authentik-Groups X-Authentik-Entitlements X-Authentik-Email X-Authentik-Name X-Authentik-Uid X-Authentik-Jwt X-Authentik-Meta-Jwks X-Authentik-Meta-Outpost X-Authentik-Meta-Provider X-Authentik-Meta-App X-Authentik-Meta-Version
+
+			# optional, in this config trust all private ranges, should probably be set to the outposts IP
+			trusted_proxies private_ranges
+		}
+	}
+}
+
 ng.media.tjo.space {
+	reverse_proxy /outpost.goauthentik.io/* http://127.0.0.1:9000 {
+		header_up Host {http.reverse_proxy.upstream.host}
+	}
+
 	reverse_proxy localhost:8096
 }
 
 request.ng.media.tjo.space {
-	reverse_proxy localhost:3000
+	reverse_proxy localhost:5055
 }
 
 radarr.ng.media.tjo.space {
+	import auth
 	reverse_proxy localhost:3000
 }
 
 sonarr.ng.media.tjo.space {
+	import auth
 	reverse_proxy localhost:3000
 }
 
 bazarr.ng.media.tjo.space {
-	reverse_proxy localhost:3000
+	import auth
+	reverse_proxy localhost:6767
 }
 
 lidarr.ng.media.tjo.space {
-	reverse_proxy localhost:3000
+	import auth
+	reverse_proxy localhost:8686
 }
 
 tdarr.ng.media.tjo.space {
+	import auth
 	reverse_proxy localhost:3000
 }
 
 readarr.ng.media.tjo.space {
+	import auth
 	reverse_proxy localhost:3000
 }
 
 prowlarr.ng.media.tjo.space {
+	import auth
 	reverse_proxy localhost:3000
 }
 
 qbitorrent.ng.media.tjo.space {
+	import auth
 	reverse_proxy localhost:3000
 }

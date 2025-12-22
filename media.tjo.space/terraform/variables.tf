@@ -31,5 +31,8 @@ variable "nodes" {
 
     data_large_storage = string
     data_large_size    = number
+
+    data_ephemeral_storage = string
+    data_ephemeral_size    = number
   }))
 }

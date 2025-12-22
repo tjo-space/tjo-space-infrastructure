@@ -1,0 +1,17 @@
+[Unit]
+Description=Authentik LDAP Outpost container
+
+[Container]
+ContainerName=authentik-ldap
+Image=ghcr.io/goauthentik/ldap:2025.10.3
+Network=media.network
+Environment=AUTHENTIK_HOST=https://id.tjo.space
+Environment=AUTHENTIK_INSECURE=false
+Environment=AUTHENTIK_TOKEN={{ authentik_ldap_token }}
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

@@ -1,0 +1,21 @@
+[Unit]
+Description=Sonarr container
+
+[Container]
+ContainerName=sonarr
+Image=ghcr.io/linuxserver/sonarr
+Network=media.network
+User=1010
+Group=1010
+Volume=/srv/data/fast/sonarr:/config:rw
+Volume=/srv/data/large/tvseries:/tv:rw
+Volume=/srv/data/ephemeral/downloads:/downloads:ro
+PublishPort=127.0.0.1:8989:8989
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

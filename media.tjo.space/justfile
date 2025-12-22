@@ -19,7 +19,7 @@ configure node tag="":
   TAGS=""; if [ -n "{{tag}}" ]; then TAGS="--tags {{tag}}"; fi
   ansible-playbook \
     --extra-vars "@{{source_directory()}}/../global.yaml" \
-    --extra-vars "tjo_cloud_version=${VERSION}" \
+    --extra-vars "tjo_space_version=${VERSION}" \
     --inventory inventory.yaml \
     $TAGS \
     playbook.yaml --limit {{node}}
@@ -31,7 +31,7 @@ configure-all tag="":
   TAGS=""; if [ -n "{{tag}}" ]; then TAGS="--tags {{tag}}"; fi
   ansible-playbook \
     --extra-vars "@{{source_directory()}}/../global.yaml" \
-    --extra-vars "tjo_cloud_version=${VERSION}" \
+    --extra-vars "tjo_space_version=${VERSION}" \
     --inventory inventory.yaml \
     $TAGS \
     playbook.yaml

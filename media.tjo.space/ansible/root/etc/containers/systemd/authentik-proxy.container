@@ -1,0 +1,18 @@
+[Unit]
+Description=Authentik PROXY Outpost container
+
+[Container]
+ContainerName=authentik-proxy
+Image=ghcr.io/goauthentik/proxy:2025.10.3
+Network=media.network
+Environment=AUTHENTIK_HOST=https://id.tjo.space
+Environment=AUTHENTIK_INSECURE=false
+Environment=AUTHENTIK_TOKEN={{ authentik_proxy_token }}
+PublishPort=127.0.0.1:9000:9000
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

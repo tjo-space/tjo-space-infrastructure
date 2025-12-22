@@ -1,0 +1,21 @@
+[Unit]
+Description=Radarr container
+
+[Container]
+ContainerName=radarr
+Image=ghcr.io/linuxserver/radarr
+Network=media.network
+User=1010
+Group=1010
+Volume=/srv/data/fast/radarr:/config:rw
+Volume=/srv/data/large/movies:/movies:rw
+Volume=/srv/data/ephemeral/downloads:/downloads:ro
+PublishPort=127.0.0.1:7878:7878
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

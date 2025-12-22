@@ -1,0 +1,21 @@
+[Unit]
+Description=Qbittorrent container
+
+[Container]
+ContainerName=qbittorrent
+Image=ghcr.io/linuxserver/qbittorrent
+Network=qbittorrent-vpn.container
+User=1010
+Group=1010
+Volume=/srv/data/fast/qbittorrent:/config:rw
+Volume=/srv/data/ephemeral/downloads:/downloads:rw
+# Port is published in the vpn container
+#PublishPort=127.0.0.1:8080:8080
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

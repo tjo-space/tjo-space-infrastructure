@@ -1,0 +1,21 @@
+[Unit]
+Description=Bazarr container
+
+[Container]
+ContainerName=bazarr
+Image=ghcr.io/linuxserver/bazarr
+Network=media.network
+User=1010
+Group=1010
+Volume=/srv/data/fast/bazarr:/config:rw
+Volume=/srv/data/large/tvseries:/tv:ro
+Volume=/srv/data/large/movies:/movies:ro
+PublishPort=127.0.0.1:6767:6767
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

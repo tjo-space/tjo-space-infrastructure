@@ -1,0 +1,21 @@
+[Unit]
+Description=Lidarr container
+
+[Container]
+ContainerName=lidarr
+Image=ghcr.io/linuxserver/lidarr
+Network=media.network
+User=1010
+Group=1010
+Volume=/srv/data/fast/lidarr:/config:rw
+Volume=/srv/data/large/music:/music:rw
+Volume=/srv/data/ephemeral/downloads:/downloads:ro
+PublishPort=127.0.0.1:8686:8686
+AutoUpdate=registry
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

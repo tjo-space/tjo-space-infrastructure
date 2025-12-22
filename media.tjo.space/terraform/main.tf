@@ -56,6 +56,10 @@ module "proxmox_node" {
       storage = each.value.data_fast_storage
       size    = each.value.data_fast_size
     },
+    {
+      storage = each.value.data_ephemeral_storage
+      size    = each.value.data_ephemeral_size
+    },
   ]
 
   userdata = {
@@ -65,6 +69,10 @@ module "proxmox_node" {
         layout     = [100]
       }
       "/dev/vdc" = {
+        table_type = "gpt"
+        layout     = [100]
+      }
+      "/dev/vdd" = {
         table_type = "gpt"
         layout     = [100]
       }
@@ -80,10 +88,16 @@ module "proxmox_node" {
         filesystem = "ext4"
         device     = "/dev/vdc"
       },
+      {
+        label      = "dataephemeral"
+        filesystem = "ext4"
+        device     = "/dev/vdd"
+      },
     ]
     mounts = [
       ["/dev/vdb1", "/srv/data/large"],
       ["/dev/vdc1", "/srv/data/fast"],
+      ["/dev/vdd1", "/srv/data/ephemeral"],
     ]
   }
   metadata = each.value.meta

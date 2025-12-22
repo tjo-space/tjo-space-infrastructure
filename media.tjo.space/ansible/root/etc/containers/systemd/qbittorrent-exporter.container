@@ -1,0 +1,21 @@
+[Unit]
+Description=Qbittorrent Exporter container
+
+[Container]
+ContainerName=qbittorrent-exporter
+Image=ghcr.io/esanchezm/prometheus-qbittorrent-exporter:sha-afdb6a1@sha256:951f8dc59759b0c0aec4c28ed98d06660219707a04fa4038e455746ff481f766
+Network=qbittorrent-vpn.container
+User=1010
+Group=1010
+Environment=QBITTORRENT_PORT=8080
+Environment=QBITTORRENT_HOST=localhost
+Environment=EXPORTER_PORT=9200
+# Port is published in the vpn container
+#PublishPort=127.0.0.1:9200:9200
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

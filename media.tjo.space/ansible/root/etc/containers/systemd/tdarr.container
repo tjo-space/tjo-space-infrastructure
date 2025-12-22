@@ -1,0 +1,29 @@
+[Unit]
+Description=Tdarr container
+
+[Container]
+ContainerName=tdarr
+Image=ghcr.io/haveagitgat/tdarr:latest
+Network=media.network
+User=1010
+Group=1010
+Volume=/srv/data/fast/tdarr/cache:/temp:rw
+Volume=/srv/data/fast/tdarr/config:/app/configs:rw
+Volume=/srv/data/fast/tdarr/server:/app/server:rw
+Volume=/srv/data/large/tvseries:/tv:rw
+Volume=/srv/data/large/movies:/movies:rw
+PublishPort=127.0.0.1:8265:8265
+AutoUpdate=registry
+Environment=serverIP=0.0.0.0
+Environment=serverPort=8266
+Environment=webUIPort=8265
+Environment=internalNode=true
+Environment=inContainer=true
+Environment=nodeName=odroid
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

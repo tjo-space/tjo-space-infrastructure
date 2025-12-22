@@ -35,6 +35,16 @@
     name: podman
     state: present
 
+- name: Set podman interface as trusted
+  ansible.posix.firewalld:
+    interface: podman1
+    zone: trusted
+    permanent: true
+    immediate: true
+    state: enabled
+  tags:
+    - firewall
+
 - name: Prepare directories
   ansible.builtin.file:
     state: directory
@@ -44,10 +54,19 @@
     group: "media"
   loop:
     - "/srv/data/fast/jellyfin"
+    - "/srv/data/fast/jellyseerr"
+    - "/srv/data/fast/prowlarr"
+    - "/srv/data/fast/lidarr"
+    - "/srv/data/fast/radarr"
+    - "/srv/data/fast/sonarr"
+    - "/srv/data/fast/tidarr"
+    - "/srv/data/fast/bazarr"
+    - "/srv/data/fast/qbittorrent"
     - "/srv/data/large/tvseries"
     - "/srv/data/large/movies"
     - "/srv/data/large/music"
-    - "/srv/data/large/books"
+    - "/srv/data/ephemeral/downloads"
+  tags: config-reload
 
 - name: Copy Podman configuration
   ansible.builtin.template:
@@ -59,16 +78,38 @@
   loop:
     - media.network
     - jellyfin.container
-    - jellyseer.container
-    - qbitorrent.container
-    - qbitorrent-vpn.container
-    - qbitorrent-exporter.container
+    - jellyseerr.container
+    - qbittorrent.container
+    - qbittorrent-vpn.container
+    - qbittorrent-exporter.container
     - prowlarr.container
     - lidarr.container
     - radarr.container
     - sonarr.container
     - tidarr.container
     - bazarr.container
-    - readarr.container
+    - authentik-ldap.container
+    - authentik-proxy.container
   notify: Systemd daemon-reload
+  tags: config-reload
+
+- name: Start services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  loop:
+    - jellyfin
+    - jellyseerr
+    - qbittorrent
+    - qbittorrent-vpn
+    - qbittorrent-exporter
+    - prowlarr
+    - lidarr
+    - radarr
+    - sonarr
+    - tidarr
+    - bazarr
+    - authentik-ldap
+    - authentik-proy
   tags: config-reload
