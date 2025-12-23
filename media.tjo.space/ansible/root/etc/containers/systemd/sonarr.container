@@ -12,6 +12,7 @@ Volume=/srv/data/large/tvseries:/tv:rw
 Volume=/srv/data/ephemeral/downloads:/downloads:ro
 PublishPort=127.0.0.1:8989:8989
 AutoUpdate=registry
+ReadOnly=true
 
 Environment=SONARR__SERVER__PORT=8989
 Environment=SONARR__AUTH__APIKEY={{ sonarr.api_key }}

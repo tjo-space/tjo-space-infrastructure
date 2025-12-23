@@ -20,6 +20,7 @@ Environment=inContainer=true
 Environment=nodeName=odroid
 Environment=PUID=1010
 Environment=PGID=1010
+NoNewPrivileges=true
 
 [Service]
 Restart=always

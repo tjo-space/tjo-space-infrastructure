@@ -91,7 +91,7 @@
     - "/srv/data/ephemeral/downloads"
   tags: config-reload
 
-- name: Copy Podman configuration
+- name: Copy network configuration
   ansible.builtin.template:
     src: 'root/etc/containers/systemd/{{ item }}'
     dest: '/etc/containers/systemd/{{ item }}'
@@ -100,30 +100,42 @@
     group: root
   loop:
     - media.network
-    - jellyfin.container
-    - jellyseerr.container
-    - qbittorrent.container
-    - qbittorrent-vpn.container
-    - qbittorrent-exporter.container
-    - prowlarr.container
-    - lidarr.container
-    - radarr.container
-    - sonarr.container
-    - tdarr.container
-    - bazarr.container
-    - authentik-ldap.container
-    - authentik-proxy.container
   tags: config-reload
+
+- name: Copy container configuration
+  ansible.builtin.template:
+    src: 'root/etc/containers/systemd/{{ item }}.container'
+    dest: '/etc/containers/systemd/{{ item }}.container'
+    mode: '0600'
+    owner: root
+    group: root
+  loop:
+    - jellyfin
+    - jellyseerr
+    - qbittorrent
+    - qbittorrent-vpn
+    - qbittorrent-exporter
+    - prowlarr
+    - lidarr
+    - radarr
+    - sonarr
+    - tdarr
+    - bazarr
+    - authentik-ldap
+    - authentik-proxy
+  tags: config-reload
+  register: container_configs
 
 - name: systemd daemon-reload
   ansible.builtin.systemd:
     daemon_reload: true
   tags: config-reload
 
-- name: Start services
+- name: Start containers
   ansible.builtin.systemd:
     name: "{{ item }}"
-    state: started
+    # In case container config changed, restart it. Otherwise we only make sure it's running.
+    state: "{{ container_configs.results | selectattr('item', 'equalto', item) | map(attribute='changed') | list | first | ternary('restarted', 'started') }}"
     enabled: true
   loop:
     - jellyfin

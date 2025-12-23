@@ -14,6 +14,7 @@ Volume=/srv/data/ephemeral/downloads:/downloads:rw
 # Port is published in the vpn container
 #PublishPort=127.0.0.1:8080:8080
 AutoUpdate=registry
+ReadOnly=true
 
 [Service]
 Restart=always

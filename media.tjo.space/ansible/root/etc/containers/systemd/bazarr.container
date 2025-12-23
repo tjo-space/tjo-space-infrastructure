@@ -12,6 +12,7 @@ Volume=/srv/data/large/tvseries:/tv:ro
 Volume=/srv/data/large/movies:/movies:ro
 PublishPort=127.0.0.1:6767:6767
 AutoUpdate=registry
+ReadOnly=true
 
 [Service]
 Restart=always

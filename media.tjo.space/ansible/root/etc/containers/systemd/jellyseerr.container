@@ -10,6 +10,7 @@ Group=1010
 Volume=/srv/data/fast/jellyseerr:/app/config:rw
 PublishPort=127.0.0.1:5055:5055
 AutoUpdate=registry
+NoNewPrivileges=true
 
 [Service]
 Restart=always
