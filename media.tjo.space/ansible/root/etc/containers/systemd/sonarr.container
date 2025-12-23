@@ -13,6 +13,17 @@ Volume=/srv/data/ephemeral/downloads:/downloads:ro
 PublishPort=127.0.0.1:8989:8989
 AutoUpdate=registry
 
+Environment=SONARR__SERVER__PORT=8989
+Environment=SONARR__AUTH__APIKEY={{ sonarr.api_key }}
+Environment=SONARR__AUTH__REQUIRED=true
+Environment=SONARR__AUTH__METHOD=External
+#Environment=SONARR__POSTGRES__HOST=nevaroo-one.postgresql.tjo.cloud
+#Environment=SONARR__POSTGRES__USER={{ sonarr.postgresql.user }}
+#Environment=SONARR__POSTGRES__PASSWORD={{ sonarr.postgresql.password }}
+#Environment=SONARR__POSTGRES__MAINDB=sonarr.media.tjo.space_main
+#Environment=SONARR__POSTGRES__LOGDB=sonarr.media.tjo.space_logs
+Environment=SONARR__LOG__ANALYTICSENABLED=false
+
 [Service]
 Restart=always
 TimeoutStartSec=60

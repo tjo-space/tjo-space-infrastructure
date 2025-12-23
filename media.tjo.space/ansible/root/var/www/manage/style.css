@@ -53,13 +53,6 @@ h2 {
   font-size: 2rem;
 }
 
-header.hero,
-main,
-footer.site-footer,
-section {
-  padding: 16px;
-}
-
 .hero {
   display: flex;
   flex-direction: column;
@@ -71,20 +64,28 @@ section {
 
 .hero .subhead {
   font-size: 1.25rem;
+  margin-top: 1em;
+}
+
+.hero .icon {
+  font-size: 4em;
 }
 
 main {
   flex: 1 1 auto;
 }
 
-.features {
+section {
+  padding: 2em 4em;
+}
+
+section.services {
   display: grid;
   gap: 24px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  padding: 40px 20px;
 }
 
-.features a {
+section.services a {
   background: #fff;
   border-radius: 12px;
   padding: 24px;
@@ -94,9 +95,19 @@ main {
   color: initial;
 }
 
-.features a:hover {
+section.services a:hover {
   background-color: var(--color-primary-100);
   border-color: var(--color-primary-200);
+}
+
+section.text {
+  background-color: #fff;
+}
+
+section.text pre {
+  background-color: var(--color-primary-100);
+  width: fit-content;
+  padding: 0.25em;
 }
 
 .symbolOfTolerance {
@@ -116,4 +127,5 @@ main {
   );
   height: 1em;
   width: 100%;
+  margin-top: 2em;
 }

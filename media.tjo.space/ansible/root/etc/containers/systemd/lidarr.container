@@ -13,6 +13,17 @@ Volume=/srv/data/ephemeral/downloads:/downloads:ro
 PublishPort=127.0.0.1:8686:8686
 AutoUpdate=registry
 
+Environment=LIDARR__SERVER__PORT=8686
+Environment=LIDARR__AUTH__APIKEY={{ lidarr.api_key }}
+Environment=LIDARR__AUTH__REQUIRED=true
+Environment=LIDARR__AUTH__METHOD=External
+#Environment=LIDARR__POSTGRES__HOST=nevaroo-one.postgresql.tjo.cloud
+#Environment=LIDARR__POSTGRES__USER={{ lidarr.postgresql.user }}
+#Environment=LIDARR__POSTGRES__PASSWORD={{ lidarr.postgresql.password }}
+#Environment=LIDARR__POSTGRES__MAINDB=lidarr.media.tjo.space_main
+#Environment=LIDARR__POSTGRES__LOGDB=lidarr.media.tjo.space_logs
+Environment=LIDARR__LOG__ANALYTICSENABLED=false
+
 [Service]
 Restart=always
 TimeoutStartSec=60

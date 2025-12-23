@@ -13,6 +13,17 @@ Volume=/srv/data/ephemeral/downloads:/downloads:ro
 PublishPort=127.0.0.1:7878:7878
 AutoUpdate=registry
 
+Environment=RADARR__SERVER__PORT=8989
+Environment=RADARR__AUTH__APIKEY={{ radarr.api_key }}
+Environment=RADARR__AUTH__REQUIRED=true
+Environment=RADARR__AUTH__METHOD=External
+#Environment=RADARR__POSTGRES__HOST=nevaroo-one.postgresql.tjo.cloud
+#Environment=RADARR__POSTGRES__USER={{ radarr.postgresql.user }}
+#Environment=RADARR__POSTGRES__PASSWORD={{ radarr.postgresql.password }}
+#Environment=RADARR__POSTGRES__MAINDB=radarr.media.tjo.space_main
+#Environment=RADARR__POSTGRES__LOGDB=radarr.media.tjo.space_logs
+Environment=RADARR__LOG__ANALYTICSENABLED=false
+
 [Service]
 Restart=always
 TimeoutStartSec=60
