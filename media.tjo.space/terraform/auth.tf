@@ -46,7 +46,7 @@ resource "authentik_outpost" "ldap" {
 // Uses Proxy authentication.
 resource "authentik_provider_proxy" "admins" {
   name               = "manage.ng.media.tjo.space"
-  external_host      = "https://ng.media.tjo.space"
+  external_host      = "https://manage.ng.media.tjo.space"
   cookie_domain      = "ng.media.tjo.space"
   authorization_flow = data.authentik_flow.default-provider-authorization-implicit-consent.id
   invalidation_flow  = data.authentik_flow.default-provider-invalidation-flow.id

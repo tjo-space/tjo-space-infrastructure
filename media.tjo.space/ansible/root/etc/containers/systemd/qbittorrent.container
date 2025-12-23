@@ -1,5 +1,7 @@
 [Unit]
 Description=Qbittorrent container
+After=qbittorrent-vpn.container
+Requires=qbittorrent-vpn.container
 
 [Container]
 ContainerName=qbittorrent

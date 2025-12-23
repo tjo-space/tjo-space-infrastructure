@@ -44,21 +44,24 @@ module "proxmox_node" {
   boot = {
     storage = each.value.boot_storage
     size    = each.value.boot_size
-    image   = "ubuntu_2404_server_cloudimg_amd64.img"
+    image   = "debian_13_server_cloudimg_amd64.img"
   }
 
   disks = [
     {
       storage = each.value.data_large_storage
       size    = each.value.data_large_size
+      index   = 1
     },
     {
       storage = each.value.data_fast_storage
       size    = each.value.data_fast_size
+      index   = 2
     },
     {
       storage = each.value.data_ephemeral_storage
       size    = each.value.data_ephemeral_size
+      index   = 3
     },
   ]
 

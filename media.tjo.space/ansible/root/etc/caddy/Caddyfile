@@ -43,25 +43,29 @@
 }
 
 ng.media.tjo.space {
-	reverse_proxy /outpost.goauthentik.io/* http://127.0.0.1:9000 {
-		header_up Host {http.reverse_proxy.upstream.host}
-	}
-
+	import auth
 	reverse_proxy localhost:8096
 }
 
 request.ng.media.tjo.space {
+	import auth
 	reverse_proxy localhost:5055
+}
+
+manage.ng.media.tjo.space {
+	import auth
+	root * /var/www/manage
+	file_server
 }
 
 radarr.ng.media.tjo.space {
 	import auth
-	reverse_proxy localhost:3000
+	reverse_proxy localhost:7878
 }
 
 sonarr.ng.media.tjo.space {
 	import auth
-	reverse_proxy localhost:3000
+	reverse_proxy localhost:8989
 }
 
 bazarr.ng.media.tjo.space {
@@ -76,20 +80,15 @@ lidarr.ng.media.tjo.space {
 
 tdarr.ng.media.tjo.space {
 	import auth
-	reverse_proxy localhost:3000
-}
-
-readarr.ng.media.tjo.space {
-	import auth
-	reverse_proxy localhost:3000
+	reverse_proxy localhost:8265
 }
 
 prowlarr.ng.media.tjo.space {
 	import auth
-	reverse_proxy localhost:3000
+	reverse_proxy localhost:9696
 }
 
-qbitorrent.ng.media.tjo.space {
+qbittorrent.ng.media.tjo.space {
 	import auth
-	reverse_proxy localhost:3000
+	reverse_proxy localhost:8080
 }

@@ -1,5 +1,7 @@
 [Unit]
 Description=Qbittorrent Exporter container
+After=qbittorrent-vpn.container qbittorrent.container
+Requires=qbittorrent-vpn.container qbittorrent.container
 
 [Container]
 ContainerName=qbittorrent-exporter

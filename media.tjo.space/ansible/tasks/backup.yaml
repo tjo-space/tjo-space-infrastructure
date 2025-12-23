@@ -20,8 +20,8 @@
     ssh_port: 22
 
 - name: Scan for backup ssh host key, port 23
-  ansible.builtin.command:
-    cmd: ssh-keyscan -p 23 {{ backup_tjo_cloud_ssh_host }} >/dev/null
+  ansible.builtin.shell:
+    cmd: ssh-keyscan -p 23 {{ backup_tjo_cloud_ssh_host }} 2>/dev/null | grep -v "#"
   changed_when: False
   register: backup_ssh_scan
 
