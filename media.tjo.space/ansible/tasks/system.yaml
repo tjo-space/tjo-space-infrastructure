@@ -1,0 +1,47 @@
+- name: Raise inotify limit
+  ansible.posix.sysctl:
+    name: 'fs.inotify.{{ item }}'
+    value: '3276800'
+    sysctl_set: yes
+    state: present
+    reload: yes
+    sysctl_file: /etc/sysctl.d/media.conf
+  loop:
+    - max_user_watches
+    - max_user_instances
+
+- name: Instal podman
+  ansible.builtin.apt:
+    name: podman
+    state: present
+
+- name: Set podman interface as trusted
+  ansible.posix.firewalld:
+    interface: podman1
+    zone: trusted
+    permanent: true
+    immediate: true
+    state: enabled
+  tags: firewall
+
+- name: Add non-free-firmware repository component
+  ansible.builtin.shell: |
+    sed -i 's/^Components: main$/& non-free-firmware/' /etc/apt/sources.list.d/debian.sources
+    apt update
+
+- name: Install firmware-linux-nonfree
+  ansible.builtin.apt:
+    name: firmware-linux-nonfree
+    state: present
+
+- name: Install intel-gpu-tools
+  ansible.builtin.apt:
+    name: intel-gpu-tools
+    state: present
+
+- name: Configure modprobe for GPU Transcoding
+  ansible.builtin.shell:
+    cmd: |
+      sudo sh -c "echo 'options i915 enable_guc=2' >> /etc/modprobe.d/i915.conf"
+      sudo update-initramfs -u && sudo update-grub
+    creates: /etc/modprobe.d/i915.conf

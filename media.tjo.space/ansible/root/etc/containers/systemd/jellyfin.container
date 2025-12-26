@@ -7,14 +7,17 @@ Image=code.tjo.space/tjo-space/jellyfin:10.11.3
 Network=media.network
 User=1010
 Group=1010
+# render group
+GroupAdd=991
+# video group
+GroupAdd=44
 Volume=/srv/data/fast/jellyfin:/config:rw
 Volume=/srv/data/large/tvseries:/data/tvshows:ro
 Volume=/srv/data/large/movies:/data/movies:ro
 Volume=/srv/data/large/music:/data/music:ro
-AddDevice=-/dev/dri/renderD128:rw
-Environment=JELLYFIN_PublishedServerUrl=https://ng.media.tjo.space
+AddDevice=/dev/dri/
+Environment=JELLYFIN_PublishedServerUrl=https://media.tjo.space
 PublishPort=127.0.0.1:8096:8096
-NoNewPrivileges=true
 
 [Service]
 Restart=always

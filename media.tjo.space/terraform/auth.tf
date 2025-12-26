@@ -14,7 +14,7 @@ data "authentik_flow" "default-invalidation-flow" {
 // User Access
 // Uses LDAP authentication.
 resource "authentik_provider_ldap" "users" {
-  name        = "ng.media.tjo.space"
+  name        = "media.tjo.space"
   base_dn     = "dc=media,dc=tjo,dc=space"
   bind_flow   = data.authentik_flow.ldap-authentication-flow.id
   unbind_flow = data.authentik_flow.default-invalidation-flow.id
@@ -22,8 +22,10 @@ resource "authentik_provider_ldap" "users" {
   search_mode = "cached"
 }
 resource "authentik_application" "users" {
-  name              = "ng.media.tjo.space"
-  slug              = "ngmediatjospace"
+  name              = "media.tjo.space"
+  slug              = "mediatjospace"
+  group             = "Movies, TV Shows and Music"
+  meta_icon         = "/media/public/application-icons/jellyfin.svg"
   protocol_provider = authentik_provider_ldap.users.id
 }
 resource "authentik_rbac_permission_user" "ldap" {
@@ -41,20 +43,27 @@ resource "authentik_outpost" "ldap" {
     authentik_provider_ldap.users.id
   ]
 }
+resource "authentik_application" "request" {
+  name      = "request.media.tjo.space"
+  slug      = "requestmediatjospace"
+  group     = "Movies, TV Shows and Music"
+  meta_icon = "/media/public/application-icons/jellyseerr.svg"
+}
 
 // Management
 // Uses Proxy authentication.
 resource "authentik_provider_proxy" "admins" {
-  name               = "manage.ng.media.tjo.space"
-  external_host      = "https://manage.ng.media.tjo.space"
-  cookie_domain      = "ng.media.tjo.space"
+  name               = "manage.media.tjo.space"
+  external_host      = "https://manage.media.tjo.space"
+  cookie_domain      = "media.tjo.space"
   authorization_flow = data.authentik_flow.default-provider-authorization-implicit-consent.id
   invalidation_flow  = data.authentik_flow.default-provider-invalidation-flow.id
   mode               = "forward_domain"
 }
 resource "authentik_application" "admins" {
-  name              = "manage.ng.media.tjo.space"
+  name              = "manage.media.tjo.space"
   slug              = "managemediatjospace"
+  group             = "Administration tjo.space"
   protocol_provider = authentik_provider_proxy.admins.id
 }
 resource "authentik_outpost" "admins" {

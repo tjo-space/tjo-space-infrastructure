@@ -18,11 +18,11 @@ Environment=RADARR__SERVER__PORT=7878
 Environment=RADARR__AUTH__APIKEY={{ radarr.api_key }}
 Environment=RADARR__AUTH__REQUIRED=DisabledForLocalAddresses
 Environment=RADARR__AUTH__METHOD=External
-#Environment=RADARR__POSTGRES__HOST=nevaroo-one.postgresql.tjo.cloud
-#Environment=RADARR__POSTGRES__USER={{ radarr.postgresql.user }}
-#Environment=RADARR__POSTGRES__PASSWORD={{ radarr.postgresql.password }}
-#Environment=RADARR__POSTGRES__MAINDB=radarr.media.tjo.space_main
-#Environment=RADARR__POSTGRES__LOGDB=radarr.media.tjo.space_logs
+Environment=RADARR__POSTGRES__HOST=nevaroo-one.postgresql.tjo.cloud
+Environment=RADARR__POSTGRES__USER={{ radarr.postgresql.user }}
+Environment=RADARR__POSTGRES__PASSWORD={{ radarr.postgresql.password }}
+Environment=RADARR__POSTGRES__MAINDB=radarr.media.tjo.space_main
+Environment=RADARR__POSTGRES__LOGDB=radarr.media.tjo.space_logs
 Environment=RADARR__LOG__ANALYTICSENABLED=false
 
 [Service]

@@ -42,7 +42,7 @@
 	}
 }
 
-ng.media.tjo.space {
+media.tjo.space {
 	route {
 		# Expose tvshows calendar (sonarr)
 		handle /_calendars/tvshows.ics {
@@ -62,54 +62,62 @@ ng.media.tjo.space {
 		}
 	}
 
+	# Maintananace Mode
+	#root * /var/www/unavailable
+	#try_files {path} /index.html
+	#file_server
+
 	route {
-		import auth
 		reverse_proxy localhost:8096
 	}
 }
 
-request.ng.media.tjo.space {
-	import auth
+request.media.tjo.space {
+	# Maintananace Mode
+	#root * /var/www/unavailable
+	#try_files {path} /index.html
+	#file_server
+
 	reverse_proxy localhost:5055
 }
 
-manage.ng.media.tjo.space {
+manage.media.tjo.space {
 	import auth
 	root * /var/www/manage
 	file_server
 }
 
-radarr.ng.media.tjo.space {
+radarr.media.tjo.space {
 	import auth
 	reverse_proxy localhost:7878
 }
 
-sonarr.ng.media.tjo.space {
+sonarr.media.tjo.space {
 	import auth
 	reverse_proxy localhost:8989
 }
 
-bazarr.ng.media.tjo.space {
+bazarr.media.tjo.space {
 	import auth
 	reverse_proxy localhost:6767
 }
 
-lidarr.ng.media.tjo.space {
+lidarr.media.tjo.space {
 	import auth
 	reverse_proxy localhost:8686
 }
 
-tdarr.ng.media.tjo.space {
+tdarr.media.tjo.space {
 	import auth
 	reverse_proxy localhost:8265
 }
 
-prowlarr.ng.media.tjo.space {
+prowlarr.media.tjo.space {
 	import auth
 	reverse_proxy localhost:9696
 }
 
-qbittorrent.ng.media.tjo.space {
+qbittorrent.media.tjo.space {
 	import auth
 	reverse_proxy localhost:8080
 }

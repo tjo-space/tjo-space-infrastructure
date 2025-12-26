@@ -32,6 +32,14 @@
     - name: Flush handlers
       ansible.builtin.meta: flush_handlers
 
+    - name: Configure System
+      ansible.builtin.import_tasks:
+        file: tasks/system.yaml
+
+    - name: Configure Caddy
+      ansible.builtin.import_tasks:
+        file: tasks/caddy.yaml
+
     - name: Configure Media
       ansible.builtin.import_tasks:
         file: tasks/media.yaml

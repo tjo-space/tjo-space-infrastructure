@@ -9,7 +9,6 @@ data "dns_aaaa_record_set" "ingress" {
 resource "desec_rrset" "ingress" {
   for_each = { for pair in setproduct(["A", "AAAA"], [
     "",
-    "books",
     "cloud",
     "code",
     "collabora",
@@ -26,8 +25,6 @@ resource "desec_rrset" "ingress" {
     "search",
     "send",
     "vault",
-    "*.ng.media",
-    "ng.media",
   ]) : "${pair[0]}-${pair[1]}" => { type = pair[0], subname = pair[1] } }
 
   domain  = "tjo.space"

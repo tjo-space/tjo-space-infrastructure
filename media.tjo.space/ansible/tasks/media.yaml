@@ -19,12 +19,32 @@
     mode: "0700"
     owner: "caddy"
     group: "caddy"
-  tags: config-reload
 
 - name: Copy www/manage files for caddy
   ansible.builtin.template:
     src: 'root/var/www/manage/{{ item }}'
     dest: '/var/www/manage/{{ item }}'
+    mode: '0600'
+    owner: caddy
+    group: caddy
+  loop:
+    - index.html
+    - style.css
+  notify: Restart caddy
+  tags: config-reload
+
+- name: Create www/unavailable dir for caddy
+  ansible.builtin.file:
+    state: directory
+    path: "/var/www/unavailable"
+    mode: "0700"
+    owner: "caddy"
+    group: "caddy"
+
+- name: Copy www/unavailable files for caddy
+  ansible.builtin.template:
+    src: 'root/var/www/unavailable/{{ item }}'
+    dest: '/var/www/unavailable/{{ item }}'
     mode: '0600'
     owner: caddy
     group: caddy
@@ -48,29 +68,16 @@
     group: media
     groups:
       - render
+      - video
     system: true
     home: /var/lib/media
     state: present
-
-- name: Instal podman
-  ansible.builtin.apt:
-    name: podman
-    state: present
-
-- name: Set podman interface as trusted
-  ansible.posix.firewalld:
-    interface: podman1
-    zone: trusted
-    permanent: true
-    immediate: true
-    state: enabled
-  tags: firewall
 
 - name: Prepare directories
   ansible.builtin.file:
     state: directory
     path: "{{ item }}"
-    mode: "0770"
+    mode: "0750"
     owner: "media"
     group: "media"
   loop:

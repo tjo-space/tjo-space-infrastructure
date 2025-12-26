@@ -1,0 +1,55 @@
+- name: Install Caddy
+  ansible.builtin.import_role:
+    name: caddy
+
+- name: Configure Caddy
+  ansible.builtin.template:
+    src: root/etc/caddy/Caddyfile
+    dest: /etc/caddy/Caddyfile
+    mode: '0600'
+    owner: "caddy"
+    group: "caddy"
+  notify: Restart caddy
+  tags: config-reload
+
+- name: Create www/manage dir for caddy
+  ansible.builtin.file:
+    state: directory
+    path: "/var/www/manage"
+    mode: "0700"
+    owner: "caddy"
+    group: "caddy"
+
+- name: Copy www/manage files for caddy
+  ansible.builtin.template:
+    src: 'root/var/www/manage/{{ item }}'
+    dest: '/var/www/manage/{{ item }}'
+    mode: '0600'
+    owner: caddy
+    group: caddy
+  loop:
+    - index.html
+    - style.css
+  notify: Restart caddy
+  tags: config-reload
+
+- name: Create www/unavailable dir for caddy
+  ansible.builtin.file:
+    state: directory
+    path: "/var/www/unavailable"
+    mode: "0700"
+    owner: "caddy"
+    group: "caddy"
+
+- name: Copy www/unavailable files for caddy
+  ansible.builtin.template:
+    src: 'root/var/www/unavailable/{{ item }}'
+    dest: '/var/www/unavailable/{{ item }}'
+    mode: '0600'
+    owner: caddy
+    group: caddy
+  loop:
+    - index.html
+    - style.css
+  notify: Restart caddy
+  tags: config-reload

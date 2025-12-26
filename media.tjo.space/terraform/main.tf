@@ -47,6 +47,14 @@ module "proxmox_node" {
     image   = "debian_13_server_cloudimg_amd64.img"
   }
 
+  hostpci = [{
+    device  = "hostpci0"
+    mapping = "gpu"
+    pcie    = false
+    rombar  = true
+    xvga    = false
+  }]
+
   disks = [
     {
       storage = each.value.data_large_storage
