@@ -43,9 +43,10 @@ build:
   #!/usr/bin/env sh
   cd {{source_directory()}}/build
 
+  DATE=$(date -u +%Y\%m\%d)
   JELLYFIN_VERSION=10.11.3
   buildah build --file "jellyfin.Containerfile" \
     --build-arg VERSION=${JELLYFIN_VERSION} \
-    --tag code.tjo.space/tjo-space/jellyfin:${JELLYFIN_VERSION} \
+    --tag code.tjo.space/tjo-space/jellyfin:${JELLYFIN_VERSION}-${DATE} \
     .
-  buildah push code.tjo.space/tjo-space/jellyfin:${JELLYFIN_VERSION}
+  buildah push code.tjo.space/tjo-space/jellyfin:${JELLYFIN_VERSION}-${DATE}
