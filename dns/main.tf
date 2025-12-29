@@ -20,7 +20,6 @@ resource "desec_rrset" "ingress" {
     "*.media",
     "media",
     "paperless",
-    "penpot",
     "rss",
     "search",
     "send",
