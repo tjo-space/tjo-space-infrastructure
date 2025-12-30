@@ -4,7 +4,6 @@ nodes = {
     cores        = 4
     memory       = 32768
     boot_storage = "local-nvme"
-    boot_size    = 16
 
     data_fast_storage = "local-nvme"
     data_fast_size    = 96
