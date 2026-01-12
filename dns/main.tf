@@ -69,10 +69,8 @@ locals {
     ] },
     ## SYSTEM
     { type = "A", subdomain = "batuu.system", records = ["100.65.175.106"] },
-    { type = "A", subdomain = "jakku.system", records = ["100.106.240.50"] },
     { type = "A", subdomain = "nevaroo.system", records = ["100.69.126.80"] },
     { type = "AAAA", subdomain = "batuu.system", records = ["fd7a:115c:a1e0::b01:af6a"] },
-    { type = "AAAA", subdomain = "jakku.system", records = ["fd7a:115c:a1e0::2b01:f033"] },
     { type = "AAAA", subdomain = "nevaroo.system", records = ["fd7a:115c:a1e0::6501:7e50"] },
   ]
 }
