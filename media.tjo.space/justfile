@@ -37,7 +37,7 @@ configure-all tag="":
     playbook.yaml
 
 ssh node:
-  ssh bine@{{node}}.media.tjo.space -4 -p 2222
+  ssh bine@{{node}}.media.tjo.space -p 2222
 
 build:
   #!/usr/bin/env sh

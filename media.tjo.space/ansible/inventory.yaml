@@ -2,6 +2,6 @@
   "hosts":
     "pink.media.tjo.space":
       "ansible_become": true
-      "ansible_host": "10.0.4.5"
+      "ansible_host": "10.0.4.1"
       "ansible_port": 2222
       "ansible_user": "bine"
