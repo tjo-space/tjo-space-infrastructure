@@ -6,7 +6,7 @@ ContainerName=qbittorrent-vpn
 Image=docker.io/qmcgaw/gluetun:v3.40.3@sha256:ab33df0037b13d2e5185a736ee4724e02843e886b91c88cf293ddd691307edd2
 Network=media.network
 AddCapability=NET_ADMIN
-AddDevice=-/dev/net/tun:rw
+AddDevice=/dev/net/tun:rw
 Environment=VPN_SERVICE_PROVIDER=mullvad
 Environment=VPN_TYPE=wireguard
 Environment=WIREGUARD_PRIVATE_KEY={{ qbittorrent_vpn_wireguard_private_key }}
