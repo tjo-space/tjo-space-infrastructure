@@ -5,3 +5,4 @@ Description=Media Podman network
 NetworkName=media
 Subnet=192.168.27.0/24
 Gateway=192.168.27.1
+IPv6=true
