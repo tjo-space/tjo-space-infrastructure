@@ -44,7 +44,7 @@ build:
   cd {{source_directory()}}/build
 
   DATE=$(date -u +%Y\%m\%d)
-  JELLYFIN_VERSION=10.11.3
+  JELLYFIN_VERSION=10.11.6
   buildah build --file "jellyfin.Containerfile" \
     --build-arg VERSION=${JELLYFIN_VERSION} \
     --tag code.tjo.space/tjo-space/jellyfin:${JELLYFIN_VERSION}-${DATE} \
