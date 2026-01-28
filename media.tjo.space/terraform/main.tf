@@ -21,7 +21,6 @@ locals {
 
   nodes_deployed = {
     for k, v in local.nodes_with_meta : k => merge(v, {
-      private_ipv4 = module.proxmox_node[k].address.ipv4
       private_ipv6 = module.proxmox_node[k].address.ipv6
     })
   }
@@ -122,7 +121,7 @@ resource "local_file" "ansible_inventory" {
     all = {
       hosts = {
         for k, v in local.nodes_deployed : v.fqdn => {
-          ansible_host   = v.private_ipv4
+          ansible_host   = v.private_ipv6
           ansible_port   = 2222
           ansible_user   = "bine"
           ansible_become = true
@@ -138,14 +137,6 @@ resource "local_file" "ansible_vars" {
   filename = "${path.module}/../ansible/vars.terraform.yaml"
 }
 
-resource "desec_rrset" "node_a" {
-  for_each = local.nodes_deployed
-  domain   = "tjo.space"
-  subname  = trimsuffix(each.value.fqdn, ".tjo.space")
-  type     = "A"
-  records  = [each.value.private_ipv4]
-  ttl      = 3600
-}
 resource "desec_rrset" "node_aaaa" {
   for_each = local.nodes_deployed
   domain   = "tjo.space"
