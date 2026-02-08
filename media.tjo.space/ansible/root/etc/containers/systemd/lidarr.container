@@ -18,7 +18,7 @@ Environment=LIDARR__SERVER__PORT=8686
 Environment=LIDARR__AUTH__APIKEY={{ lidarr.api_key }}
 Environment=LIDARR__AUTH__REQUIRED=true
 Environment=LIDARR__AUTH__METHOD=External
-Environment=LIDARR__POSTGRES__HOST=nevaroo-one.postgresql.tjo.cloud
+Environment=LIDARR__POSTGRES__HOST=nevaroo-one.postgresql.cloud.internal
 Environment=LIDARR__POSTGRES__USER={{ lidarr.postgresql.user }}
 Environment=LIDARR__POSTGRES__PASSWORD={{ lidarr.postgresql.password }}
 Environment=LIDARR__POSTGRES__MAINDB=lidarr.media.tjo.space_main

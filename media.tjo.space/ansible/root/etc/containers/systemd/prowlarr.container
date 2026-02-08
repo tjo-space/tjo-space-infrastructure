@@ -16,7 +16,7 @@ Environment=PROWLARR__SERVER__PORT=9696
 Environment=PROWLARR__AUTH__APIKEY={{ prowlarr.api_key }}
 Environment=PROWLARR__AUTH__REQUIRED=true
 Environment=PROWLARR__AUTH__METHOD=External
-Environment=PROWLARR__POSTGRES__HOST=nevaroo-one.postgresql.tjo.cloud
+Environment=PROWLARR__POSTGRES__HOST=nevaroo-one.postgresql.cloud.internal
 Environment=PROWLARR__POSTGRES__USER={{ prowlarr.postgresql.user }}
 Environment=PROWLARR__POSTGRES__PASSWORD={{ prowlarr.postgresql.password }}
 Environment=PROWLARR__POSTGRES__MAINDB=prowlarr.media.tjo.space_main
