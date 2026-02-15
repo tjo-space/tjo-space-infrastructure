@@ -12,6 +12,7 @@ resource "desec_rrset" "ingress" {
     "cloud",
     "code",
     "collabora",
+    "collabora.cloud",
     "chat",
     "turn.chat",
     "mas.chat",
@@ -24,8 +25,8 @@ resource "desec_rrset" "ingress" {
     "search",
     "send",
     "vault",
-    "ngcloud",
-    "collabora.ngcloud",
+    "cloud.ng",
+    "collabora.cloud.ng",
   ]) : "${pair[0]}-${pair[1]}" => { type = pair[0], subname = pair[1] } }
 
   domain  = "tjo.space"
