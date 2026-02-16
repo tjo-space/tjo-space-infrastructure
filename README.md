@@ -1,22 +1,21 @@
 # `infrastructure.tjo.space`
 
-In this repository (wip) lives everything needed to setup
-the `tjo.space` infrastructure.
+In this repository you can find some of `tjo.space` infrastructure setup.
 
-This is deployed on services provided by `tjo.cloud`. Such as
-the Kubernetes (`k8s.tjo.cloud`) and Proxmox (`proxmox.tjo.cloud`) platforms.
-
-By default, services are deployed on Kubernetes, with the exception of services
-that require special hardware (video cards etc.).
+Services here are managed with Terraform and Ansible. There is collection of other services
+that are managed via https://argocd.kubernetes.tjo.cloud instead (See Kubernetes Services section).
 
 ## Services
+- [dns](./dns) - Main DNS Configuration.
+- [media.tjo.space](./media.tjo.space) - Media Server VM deployment.
 
- - [chat.tjo.space](./services/chat.tjo.space)
- - [cloud.tjo.space](./services/cloud.tjo.space)
- - [code.tjo.space](./services/code.tjo.space)
- - [paperless.tjo.space](./services/paperless.tjo.space)
- - [rss.tjo.space](./services/rss.tjo.space)
- - [search.tjo.space](./services/search.tjo.space)
- - [send.tjo.space](./services/send.tjo.space)
- - [vault.tjo.space](./services/vault.tjo.space)
- - [yt.tjo.space](./services/yt.tjo.space)
+## Kubernetes Services
+
+ - [chat.tjo.space](https://code.tjo.space/tjo-space/chat)
+ - [cloud.tjo.space](https://code.tjo.space/tjo-space/cloud)
+ - [code.tjo.space](https://code.tjo.space/tjo-space/code)
+ - [paperless.tjo.space](https://code.tjo.space/tjo-space/paperless)
+ - [rss.tjo.space](https://code.tjo.space/tjo-space/rss)
+ - [search.tjo.space](https://code.tjo.space/tjo-space/search)
+ - [send.tjo.space](https://code.tjo.space/tjo-space/send)
+ - [vault.tjo.space](https://code.tjo.space/tjo-space/vault)

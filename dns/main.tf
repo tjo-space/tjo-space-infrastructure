@@ -10,9 +10,8 @@ resource "desec_rrset" "ingress" {
   for_each = { for pair in setproduct(["A", "AAAA"], [
     "",
     "cloud",
-    "code",
-    "collabora",
     "collabora.cloud",
+    "code",
     "chat",
     "turn.chat",
     "mas.chat",
@@ -25,8 +24,6 @@ resource "desec_rrset" "ingress" {
     "search",
     "send",
     "vault",
-    "cloud.ng",
-    "collabora.cloud.ng",
   ]) : "${pair[0]}-${pair[1]}" => { type = pair[0], subname = pair[1] } }
 
   domain  = "tjo.space"
@@ -39,8 +36,8 @@ resource "desec_rrset" "https" {
   for_each = toset([
     "",
     "cloud",
+    "collabora.cloud",
     "code",
-    "collabora",
     "chat",
     "turn.chat",
     "mas.chat",
