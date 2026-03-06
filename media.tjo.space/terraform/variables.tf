@@ -8,11 +8,6 @@ variable "authentik_token" {
   sensitive = true
 }
 
-variable "desec_token" {
-  type      = string
-  sensitive = true
-}
-
 variable "proxmox_token" {
   type      = string
   sensitive = true
@@ -35,4 +30,9 @@ variable "nodes" {
     data_ephemeral_storage = string
     data_ephemeral_size    = number
   }))
+}
+
+variable "dns_tjo_cloud_token" {
+  type      = string
+  sensitive = true
 }

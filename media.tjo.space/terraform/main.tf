@@ -137,11 +137,11 @@ resource "local_file" "ansible_vars" {
   filename = "${path.module}/../ansible/vars.terraform.yaml"
 }
 
-resource "desec_rrset" "node_aaaa" {
-  for_each = local.nodes_deployed
-  domain   = "tjo.space"
-  subname  = trimsuffix(each.value.fqdn, ".tjo.space")
-  type     = "AAAA"
-  records  = [each.value.private_ipv6]
-  ttl      = 3600
+resource "technitium_record" "for_node" {
+  for_each   = local.nodes_deployed
+  zone       = "space.internal"
+  domain     = "${each.value.name}.media.space.internal"
+  ttl        = 60
+  type       = "AAAA"
+  ip_address = each.value.private_ipv6
 }

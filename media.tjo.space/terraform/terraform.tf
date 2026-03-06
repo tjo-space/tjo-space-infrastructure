@@ -12,21 +12,17 @@ terraform {
       source  = "bpg/proxmox"
       version = "0.84.0"
     }
-    desec = {
-      source  = "Valodim/desec"
-      version = "0.6.1"
-    }
     local = {
       source  = "hashicorp/local"
       version = "2.5.3"
     }
+    technitium = {
+      source  = "kevynb/technitium"
+      version = "0.4.0"
+    }
   }
 
   required_version = "~> 1.9.0"
-}
-
-provider "desec" {
-  api_token = var.desec_token
 }
 
 provider "authentik" {
@@ -73,4 +69,9 @@ provider "proxmox" {
       port    = 22
     }
   }
+}
+
+provider "technitium" {
+  url   = "https://dns.tjo.cloud"
+  token = var.dns_tjo_cloud_token
 }
