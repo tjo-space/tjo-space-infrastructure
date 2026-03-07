@@ -14,7 +14,7 @@
         targets    = concat(
           [
             {"__address__" = "127.0.0.1:2019", "instance" = constants.hostname, "job" = "integrations/caddy"},
-            {"__address__" = "127.0.0.1:9200", "instance" = constants.hostname, "job" = "integrations/qbittorrent"},
+            {"__address__" = "fd6a:e0a3:bb4b:c6b3::17:9200", "instance" = constants.hostname, "job" = "integrations/qbittorrent"},
           ],
         )
         forward_to = [

@@ -25,12 +25,12 @@
 	# directive execution order is only as stated if enclosed with route.
 	route {
 		# always forward outpost path to actual outpost
-		reverse_proxy /outpost.goauthentik.io/* http://127.0.0.1:9000 {
+		reverse_proxy /outpost.goauthentik.io/* http://[fd6a:e0a3:bb4b:c6b3::20]:9000 {
 			header_up Host {http.reverse_proxy.upstream.host}
 		}
 
 		# forward authentication to outpost
-		forward_auth http://127.0.0.1:9000 {
+		forward_auth http://[fd6a:e0a3:bb4b:c6b3::20]:9000 {
 			uri /outpost.goauthentik.io/auth/caddy
 
 			# capitalization of the headers is important, otherwise they will be empty
@@ -47,7 +47,7 @@ media.tjo.space {
 		# Expose tvshows calendar (sonarr)
 		handle /_calendars/tvshows.ics {
 			rewrite "/feed/v3/calendar/Sonarr.ics?apikey={{ sonarr.api_key }}&asAllDay=true"
-			reverse_proxy localhost:8989
+			reverse_proxy [fd6a:e0a3:bb4b:c6b3::13]:8989
 			header Access-Control-Allow-Origin "*"
 			header Access-Control-Allow-Methods "GET"
 			header Access-Control-Max-Age "3600"
@@ -55,7 +55,7 @@ media.tjo.space {
 		# Expose movies calendar (radarr)
 		handle /_calendars/movies.ics {
 			rewrite "/feed/v3/calendar/Radarr.ics?apikey={{ radarr.api_key }}&asAllDay=true"
-			reverse_proxy localhost:7878
+			reverse_proxy [fd6a:e0a3:bb4b:c6b3::12]:7878
 			header Access-Control-Allow-Origin "*"
 			header Access-Control-Allow-Methods "GET"
 			header Access-Control-Max-Age "3600"
@@ -68,7 +68,7 @@ media.tjo.space {
 	#file_server
 
 	route {
-		reverse_proxy localhost:8096
+		reverse_proxy [fd6a:e0a3:bb4b:c6b3::10]:8096
 	}
 }
 
@@ -78,7 +78,7 @@ request.media.tjo.space {
 	#try_files {path} /index.html
 	#file_server
 
-	reverse_proxy localhost:5055
+	reverse_proxy [fd6a:e0a3:bb4b:c6b3::19]:5055
 }
 
 manage.media.tjo.space {
@@ -89,35 +89,35 @@ manage.media.tjo.space {
 
 radarr.media.tjo.space {
 	import auth
-	reverse_proxy localhost:7878
+	reverse_proxy [fd6a:e0a3:bb4b:c6b3::12]:7878
 }
 
 sonarr.media.tjo.space {
 	import auth
-	reverse_proxy localhost:8989
+	reverse_proxy [fd6a:e0a3:bb4b:c6b3::13]:8989
 }
 
 bazarr.media.tjo.space {
 	import auth
-	reverse_proxy localhost:6767
+	reverse_proxy [fd6a:e0a3:bb4b:c6b3::15]:6767
 }
 
 lidarr.media.tjo.space {
 	import auth
-	reverse_proxy localhost:8686
+	reverse_proxy [fd6a:e0a3:bb4b:c6b3::14]:8686
 }
 
 tdarr.media.tjo.space {
 	import auth
-	reverse_proxy localhost:8265
+	reverse_proxy [fd6a:e0a3:bb4b:c6b3::18]:8265
 }
 
 prowlarr.media.tjo.space {
 	import auth
-	reverse_proxy localhost:9696
+	reverse_proxy [fd6a:e0a3:bb4b:c6b3::11]:9696
 }
 
 qbittorrent.media.tjo.space {
 	import auth
-	reverse_proxy localhost:8080
+	reverse_proxy [fd6a:e0a3:bb4b:c6b3::17]:8080
 }

@@ -10,9 +10,10 @@ Group=1010
 Volume=/srv/data/fast/bazarr:/config:rw
 Volume=/srv/data/large/tvseries:/tv:rw
 Volume=/srv/data/large/movies:/movies:rw
-PublishPort=127.0.0.1:6767:6767
 AutoUpdate=registry
 ReadOnly=true
+#PublishPort=6767:6767
+IP6=fd6a:e0a3:bb4b:c6b3::15
 
 [Service]
 Restart=always

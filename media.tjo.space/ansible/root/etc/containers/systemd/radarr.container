@@ -10,9 +10,10 @@ Group=1010
 Volume=/srv/data/fast/radarr:/config:rw
 Volume=/srv/data/large/movies:/movies:rw
 Volume=/srv/data/ephemeral/downloads:/downloads:ro
-PublishPort=127.0.0.1:7878:7878
 AutoUpdate=registry
 ReadOnly=true
+#PublishPort=7878:7878
+IP6=fd6a:e0a3:bb4b:c6b3::12
 
 Environment=RADARR__SERVER__PORT=7878
 Environment=RADARR__AUTH__APIKEY={{ radarr.api_key }}

@@ -13,9 +13,10 @@ Environment=WIREGUARD_PRIVATE_KEY={{ qbittorrent_vpn_wireguard_private_key }}
 Environment=WIREGUARD_ADDRESSES={{ qbittorrent_vpn_wireguard_addresses }}
 Environment=SERVER_COUNTRIES=Slovenia,Croatia,Serbia
 # Qbittorrent Web UI
-PublishPort=127.0.0.1:8080:8080
+#PublishPort=8080:8080
 # Qbittorrent Exporter
-PublishPort=127.0.0.1:9200:9200
+#PublishPort=9200:9200
+IP6=fd6a:e0a3:bb4b:c6b3::17
 
 [Service]
 Restart=always

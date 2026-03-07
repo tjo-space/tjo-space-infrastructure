@@ -24,6 +24,15 @@
     state: enabled
   tags: firewall
 
+- name: Configure NAT64/DNS64 support
+  ansible.posix.firewalld:
+    rich_rule: rule family=ipv6 destination address="64:ff9b::/96" masquerade
+    zone: trusted
+    permanent: true
+    immediate: true
+    state: enabled
+  tags: firewall
+
 - name: Add non-free-firmware repository component
   ansible.builtin.shell: |
     sed -i 's/^Components: main$/& non-free-firmware/' /etc/apt/sources.list.d/debian.sources

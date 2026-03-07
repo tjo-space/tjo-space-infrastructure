@@ -10,7 +10,6 @@ Volume=/srv/data/fast/tdarr/config:/app/configs:rw
 Volume=/srv/data/fast/tdarr/server:/app/server:rw
 Volume=/srv/data/large/tvseries:/tv:rw
 Volume=/srv/data/large/movies:/movies:rw
-PublishPort=127.0.0.1:8265:8265
 AutoUpdate=registry
 Environment=serverIP=0.0.0.0
 Environment=serverPort=8266
@@ -21,6 +20,8 @@ Environment=nodeName=odroid
 Environment=PUID=1010
 Environment=PGID=1010
 AddDevice=/dev/dri/
+#PublishPort=8265:8265
+IP6=fd6a:e0a3:bb4b:c6b3::18
 
 [Service]
 Restart=always

@@ -8,9 +8,10 @@ Network=media.network
 User=1010
 Group=1010
 Volume=/srv/data/fast/prowlarr:/config:rw
-PublishPort=127.0.0.1:9696:9696
 AutoUpdate=registry
 ReadOnly=true
+#PublishPort=9696:9696
+IP6=fd6a:e0a3:bb4b:c6b3::11
 
 Environment=PROWLARR__SERVER__PORT=9696
 Environment=PROWLARR__AUTH__APIKEY={{ prowlarr.api_key }}

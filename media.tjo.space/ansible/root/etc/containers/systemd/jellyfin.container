@@ -17,7 +17,8 @@ Volume=/srv/data/large/movies:/data/movies:ro
 Volume=/srv/data/large/music:/data/music:ro
 AddDevice=/dev/dri/
 Environment=JELLYFIN_PublishedServerUrl=https://media.tjo.space
-PublishPort=127.0.0.1:8096:8096
+#PublishPort=8096:8096
+IP6=fd6a:e0a3:bb4b:c6b3::10
 
 [Service]
 Restart=always

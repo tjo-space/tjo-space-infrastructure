@@ -10,9 +10,10 @@ Group=1010
 Volume=/srv/data/fast/lidarr:/config:rw
 Volume=/srv/data/large/music:/music:rw
 Volume=/srv/data/ephemeral/downloads:/downloads:ro
-PublishPort=127.0.0.1:8686:8686
 AutoUpdate=registry
 ReadOnly=true
+#PublishPort=8686:8686
+IP6=fd6a:e0a3:bb4b:c6b3::14
 
 Environment=LIDARR__SERVER__PORT=8686
 Environment=LIDARR__AUTH__APIKEY={{ lidarr.api_key }}
