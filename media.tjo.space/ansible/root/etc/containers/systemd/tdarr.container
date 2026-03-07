@@ -11,7 +11,7 @@ Volume=/srv/data/fast/tdarr/server:/app/server:rw
 Volume=/srv/data/large/tvseries:/tv:rw
 Volume=/srv/data/large/movies:/movies:rw
 AutoUpdate=registry
-Environment=serverIP=0.0.0.0
+Environment=serverIP=::
 Environment=serverPort=8266
 Environment=webUIPort=8265
 Environment=internalNode=true
