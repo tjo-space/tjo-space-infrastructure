@@ -26,7 +26,7 @@
     group: "media"
   loop:
     - "/srv/data/fast/jellyfin"
-    - "/srv/data/fast/jellyseerr"
+    - "/srv/data/fast/seerr"
     - "/srv/data/fast/prowlarr"
     - "/srv/data/fast/lidarr"
     - "/srv/data/fast/radarr"
@@ -62,7 +62,7 @@
     group: root
   loop:
     - jellyfin
-    - jellyseerr
+    - seerr
     - qbittorrent
     - qbittorrent-vpn
     - qbittorrent-exporter
@@ -90,7 +90,7 @@
     enabled: true
   loop:
     - jellyfin
-    - jellyseerr
+    - seerr
     - qbittorrent
     - qbittorrent-vpn
     - qbittorrent-exporter

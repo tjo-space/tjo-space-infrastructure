@@ -1,13 +1,13 @@
 [Unit]
-Description=Jellyseerr container
+Description=Seerr container
 
 [Container]
-ContainerName=jellyseerr
-Image=ghcr.io/fallenbagel/jellyseerr:2.7.3
+ContainerName=seerr
+Image=ghcr.io/seerr-team/seerr:v3.1.0
 Network=media.network
 User=1010
 Group=1010
-Volume=/srv/data/fast/jellyseerr:/app/config:rw
+Volume=/srv/data/fast/seerr:/app/config:rw
 AutoUpdate=registry
 NoNewPrivileges=true
 #PublishPort=5055:5055
