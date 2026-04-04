@@ -10,7 +10,6 @@ resource "desec_rrset" "ingress" {
   for_each = { for pair in setproduct(["A", "AAAA"], [
     "",
     "cloud",
-    "collabora.cloud",
     "collabora",
     "code",
     "chat",
@@ -24,7 +23,6 @@ resource "desec_rrset" "ingress" {
     "photos",
     "rss",
     "search",
-    "send",
     "vault",
   ]) : "${pair[0]}-${pair[1]}" => { type = pair[0], subname = pair[1] } }
 
@@ -38,7 +36,6 @@ resource "desec_rrset" "https" {
   for_each = toset([
     "",
     "cloud",
-    "collabora.cloud",
     "collabora",
     "code",
     "chat",
@@ -52,7 +49,6 @@ resource "desec_rrset" "https" {
     "photos",
     "rss",
     "search",
-    "send",
     "vault",
   ])
 
