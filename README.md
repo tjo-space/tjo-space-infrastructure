@@ -8,6 +8,7 @@ that are managed via https://argocd.kubernetes.tjo.cloud instead (See Kubernetes
 ## Services
 - [dns](./dns) - Main DNS Configuration.
 - [media.tjo.space](./media.tjo.space) - Media Server VM deployment.
+- [code.tjo.space](./code.tjo.space) - Forgejo VM deployment.
 
 ## Kubernetes Services
 
@@ -17,5 +18,4 @@ that are managed via https://argocd.kubernetes.tjo.cloud instead (See Kubernetes
  - [paperless.tjo.space](/tjo-space/paperless)
  - [rss.tjo.space](/tjo-space/rss)
  - [search.tjo.space](/tjo-space/search)
- - [send.tjo.space](/tjo-space/send)
  - [vault.tjo.space](/tjo-space/vault)
