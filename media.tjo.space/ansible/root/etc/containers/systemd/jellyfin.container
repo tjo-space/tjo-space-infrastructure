@@ -12,9 +12,9 @@ GroupAdd=991
 # video group
 GroupAdd=44
 Volume=/srv/data/fast/jellyfin:/config:rw
-Volume=/srv/data/large/tvseries:/data/tvshows:ro
-Volume=/srv/data/large/movies:/data/movies:ro
-Volume=/srv/data/large/music:/data/music:ro
+Volume=/srv/data/large/tvseries:/data/tvshows:rw
+Volume=/srv/data/large/movies:/data/movies:rw
+Volume=/srv/data/large/music:/data/music:rw
 AddDevice=/dev/dri/
 Environment=JELLYFIN_PublishedServerUrl=https://media.tjo.space
 #PublishPort=8096:8096
