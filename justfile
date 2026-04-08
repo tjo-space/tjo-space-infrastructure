@@ -7,6 +7,7 @@ export SOPS_AGE_KEY_FILE := if os() == "linux" {`echo "$HOME/.config/sops/age/ke
 
 mod dns 'dns'
 mod media 'media.tjo.space'
+mod code 'code.tjo.space'
 
 import 'secrets.justfile'
 

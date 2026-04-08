@@ -1,0 +1,45 @@
+---
+- name: Configure code.tjo.space
+  hosts: all
+
+  vars_files:
+    - vars.yaml
+    - vars.terraform.yaml
+    - vars.secrets.yaml
+
+  handlers: []
+
+  tasks:
+    - name: Run defaults
+      ansible.builtin.import_role:
+        name: default
+      vars:
+        version: "{{ tjo_space_version }}"
+        ssh_keys: "{{ tjo_space_admin_ssh_keys }}"
+
+    - name: Install and Configure Observability
+      ansible.builtin.import_tasks:
+        file: tasks/observability.yaml
+
+    - name: Install and Configure Firewall
+      ansible.builtin.import_tasks:
+        file: tasks/firewall.yaml
+
+    - name: Install and Configure Backups
+      ansible.builtin.import_tasks:
+        file: tasks/backup.yaml
+
+    - name: Flush handlers
+      ansible.builtin.meta: flush_handlers
+
+    - name: Configure System
+      ansible.builtin.import_tasks:
+        file: tasks/system.yaml
+
+    - name: Configure Caddy
+      ansible.builtin.import_tasks:
+        file: tasks/caddy.yaml
+
+    - name: Configure Code
+      ansible.builtin.import_tasks:
+        file: tasks/code.yaml

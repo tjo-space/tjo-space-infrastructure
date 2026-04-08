@@ -1,0 +1,2 @@
+restic_backup_dir: "/srv/data"
+restic_repository: "sftp://u409586-sub8@backup.tjo.cloud:23//home/backup/code.tjo.space"

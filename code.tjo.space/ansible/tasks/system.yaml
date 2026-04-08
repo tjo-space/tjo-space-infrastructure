@@ -1,0 +1,22 @@
+- name: Instal podman
+  ansible.builtin.apt:
+    name: podman
+    state: present
+
+- name: Set podman interface as trusted
+  ansible.posix.firewalld:
+    interface: podman1
+    zone: trusted
+    permanent: true
+    immediate: true
+    state: enabled
+  tags: firewall
+
+- name: Configure NAT64/DNS64 support
+  ansible.posix.firewalld:
+    rich_rule: rule family=ipv6 destination address="64:ff9b::/96" masquerade
+    zone: public
+    permanent: true
+    immediate: true
+    state: enabled
+  tags: firewall

@@ -1,0 +1,7 @@
+[Unit]
+Description=Code Podman network
+
+[Network]
+NetworkName=code
+Gateway=fd6a:e0a3:bb4b:c6b3::1
+Subnet=fd6a:e0a3:bb4b:c6b3::/64

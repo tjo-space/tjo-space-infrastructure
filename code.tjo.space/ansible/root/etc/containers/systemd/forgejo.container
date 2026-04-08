@@ -1,0 +1,25 @@
+[Unit]
+Description=Forgejo container
+
+[Container]
+ContainerName=forgejo
+Image=codeberg.org/forgejo/forgejo:14
+AutoUpdate=registry
+Network=code.network
+Volume=/etc/forgejo/app.ini:/data/gitea/conf/app.ini:ro
+Volume=/etc/forgejo/templates/custom/footer.tmpl:/data/gitea/templates/custom/footer.tmpl:ro
+Volume=/srv/data/forgejo:/data:rw
+IP6=fd6a:e0a3:bb4b:c6b3::5
+
+Environment=USER_UID=1010
+Environment=USER_GID=1010
+
+# SSH Access
+PublishPort=2244:2244
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

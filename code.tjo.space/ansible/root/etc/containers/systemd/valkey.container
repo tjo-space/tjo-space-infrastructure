@@ -1,0 +1,21 @@
+[Unit]
+Description=Valkey container
+
+[Container]
+ContainerName=valkey
+Image=docker.io/valkey/valkey:9
+AutoUpdate=registry
+Network=code.network
+User=1010
+Group=1010
+Volume=/srv/data/valkey:/data:rw
+ReadOnly=true
+IP6=fd6a:e0a3:bb4b:c6b3::3
+Exec=--save 60 1 --loglevel warning
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

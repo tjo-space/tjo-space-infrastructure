@@ -34,7 +34,7 @@ module "proxmox_node" {
 
   name        = each.value.name
   fqdn        = each.value.fqdn
-  description = "media.tjo.cloud node ${each.value.name}"
+  description = "code.tjo.cloud node ${each.value.name}"
   host        = each.value.host
 
   cores  = each.value.cores
@@ -46,29 +46,11 @@ module "proxmox_node" {
     image   = "debian_13_server_cloudimg_amd64.img"
   }
 
-  hostpci = [{
-    device  = "hostpci0"
-    mapping = "gpu"
-    pcie    = false
-    rombar  = true
-    xvga    = false
-  }]
-
   disks = [
     {
-      storage = each.value.data_large_storage
-      size    = each.value.data_large_size
+      storage = each.value.data_storage
+      size    = each.value.data_size
       index   = 1
-    },
-    {
-      storage = each.value.data_fast_storage
-      size    = each.value.data_fast_size
-      index   = 2
-    },
-    {
-      storage = each.value.data_ephemeral_storage
-      size    = each.value.data_ephemeral_size
-      index   = 3
     },
   ]
 
@@ -78,42 +60,22 @@ module "proxmox_node" {
         table_type = "gpt"
         layout     = [100]
       }
-      "/dev/vdc" = {
-        table_type = "gpt"
-        layout     = [100]
-      }
-      "/dev/vdd" = {
-        table_type = "gpt"
-        layout     = [100]
-      }
     }
     fs_setup = [
       {
-        label      = "datalarge"
+        label      = "data"
         filesystem = "ext4"
         device     = "/dev/vdb"
       },
-      {
-        label      = "datafast"
-        filesystem = "ext4"
-        device     = "/dev/vdc"
-      },
-      {
-        label      = "dataephemeral"
-        filesystem = "ext4"
-        device     = "/dev/vdd"
-      },
     ]
     mounts = [
-      ["/dev/vdb1", "/srv/data/large"],
-      ["/dev/vdc1", "/srv/data/fast"],
-      ["/dev/vdd1", "/srv/data/ephemeral"],
+      ["/dev/vdb1", "/srv/data"],
     ]
   }
   metadata = each.value.meta
 
   ssh_keys = local.global.tjo_space_admin_ssh_keys
-  tags     = ["media.tjo.space", "tjo.space"]
+  tags     = ["code.tjo.space", "tjo.space"]
 }
 
 resource "local_file" "ansible_inventory" {
@@ -140,7 +102,7 @@ resource "local_file" "ansible_vars" {
 resource "technitium_record" "root" {
   for_each   = local.nodes_deployed
   zone       = "space.internal"
-  domain     = "media.space.internal"
+  domain     = "code.space.internal"
   ttl        = 60
   type       = "AAAA"
   ip_address = each.value.private_ipv6
@@ -149,7 +111,7 @@ resource "technitium_record" "root" {
 resource "technitium_record" "for_node" {
   for_each   = local.nodes_deployed
   zone       = "space.internal"
-  domain     = "${each.value.name}.media.space.internal"
+  domain     = "${each.value.name}.code.space.internal"
   ttl        = 60
   type       = "AAAA"
   ip_address = each.value.private_ipv6

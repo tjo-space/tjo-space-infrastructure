@@ -72,6 +72,42 @@ media.tjo.space {
 	}
 }
 
+media.space.internal {
+	tls {
+		issuer acme {
+			dir https://ca.cloud.internal/acme/v1/directory
+		}
+	}
+
+	route {
+		# Expose tvshows calendar (sonarr)
+		handle /_calendars/tvshows.ics {
+			rewrite "/feed/v3/calendar/Sonarr.ics?apikey={{ sonarr.api_key }}&asAllDay=true"
+			reverse_proxy [fd6a:e0a3:bb4b:c6b3::13]:8989
+			header Access-Control-Allow-Origin "*"
+			header Access-Control-Allow-Methods "GET"
+			header Access-Control-Max-Age "3600"
+		}
+		# Expose movies calendar (radarr)
+		handle /_calendars/movies.ics {
+			rewrite "/feed/v3/calendar/Radarr.ics?apikey={{ radarr.api_key }}&asAllDay=true"
+			reverse_proxy [fd6a:e0a3:bb4b:c6b3::12]:7878
+			header Access-Control-Allow-Origin "*"
+			header Access-Control-Allow-Methods "GET"
+			header Access-Control-Max-Age "3600"
+		}
+	}
+
+	# Maintananace Mode
+	#root * /var/www/unavailable
+	#try_files {path} /index.html
+	#file_server
+
+	route {
+		reverse_proxy [fd6a:e0a3:bb4b:c6b3::10]:8096
+	}
+}
+
 request.media.tjo.space {
 	# Maintananace Mode
 	#root * /var/www/unavailable

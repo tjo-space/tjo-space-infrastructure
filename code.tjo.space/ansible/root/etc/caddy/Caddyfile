@@ -1,0 +1,46 @@
+{
+	log
+	metrics {
+		per_host
+	}
+	servers {
+		listener_wrappers {
+			proxy_protocol {
+				timeout 2s
+				# Using comment hack here. Otherwise caddy fmt takes the template
+				#  curly brackets and tries to "format them", which breaks things.
+				# {{ "\n allow " + (tjo_space_networks | join(' ')) }}
+				fallback_policy reject
+			}
+			tls {
+				issuer acme {
+					disable_http_challenge
+				}
+			}
+		}
+	}
+}
+
+code.tjo.space {
+	redir /user/login* /user/oauth2/id.tjo.space
+
+	reverse_proxy [fd6a:e0a3:bb4b:c6b3::2]:3000 {
+		header_up X-Real-Ip {remote_host}
+		header_up X-Http-Version {http.request.proto}
+	}
+}
+
+code.space.internal {
+	tls {
+		issuer acme {
+			dir https://ca.cloud.internal/acme/v1/directory
+		}
+	}
+
+	redir /user/login* /user/oauth2/id.tjo.space
+
+	reverse_proxy [fd6a:e0a3:bb4b:c6b3::2]:3000 {
+		header_up X-Real-Ip {remote_host}
+		header_up X-Http-Version {http.request.proto}
+	}
+}

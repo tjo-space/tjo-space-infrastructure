@@ -1,0 +1,20 @@
+[Unit]
+Description=valkey-exporter container
+
+[Container]
+ContainerName=valkey-exporter
+Image=docker.io/oliver006/redis_exporter:v1.80.1@sha256:bac9872da2b48e6eebbffb11517a5dcda59958eda51e1e4231eeb5dd516b4a5f
+Network=code.network
+User=1010
+Group=1010
+AutoUpdate=registry
+ReadOnly=true
+IP6=fd6a:e0a3:bb4b:c6b3::4
+Exec=--redis.addr=redis://[fd6a:e0a3:bb4b:c6b3::3]:6379
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target

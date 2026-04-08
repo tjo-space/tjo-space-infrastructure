@@ -1,0 +1,31 @@
+- name: FIREWALL - Define internal zone
+  ansible.posix.firewalld:
+    source: '{{ item }}'
+    zone: internal
+    permanent: true
+    immediate: true
+    state: enabled
+  loop: "{{ tjo_space_networks }}"
+  tags: firewall
+
+- name: FIREWALL - HTTP and HTTPS and SSH
+  ansible.posix.firewalld:
+    port: '{{ item }}'
+    zone: internal
+    permanent: true
+    immediate: true
+    state: enabled
+  loop:
+    - "80/tcp"
+    - "443/tcp"
+    - "2244/tcp"
+  tags: firewall
+
+- name: FIREWALL - Allow SSH
+  ansible.posix.firewalld:
+    service: ssh
+    zone: internal
+    permanent: true
+    immediate: true
+    state: enabled
+  tags: firewall

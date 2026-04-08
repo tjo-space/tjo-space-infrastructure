@@ -1,0 +1,27 @@
+## Anubis has the ability to let you import snippets of configuration into the main
+## configuration file. This allows you to break up your config into smaller parts
+## that get logically assembled into one big file.
+##
+## Of note, a bot rule can either have inline bot configuration or import a
+## bot config snippet. You cannot do both in a single bot rule.
+##
+## Import paths can either be prefixed with (data) to import from the common/shared
+## rules in the data folder in the Anubis source tree or will point to absolute/relative
+## paths in your filesystem. If you don't have access to the Anubis source tree, check
+## /usr/share/docs/anubis/data or in the tarball you extracted Anubis from.
+
+bots:
+  # You can import the entire default config with this macro:
+  - import: (data)/meta/default-config.yaml
+
+  - name: allow-access-to-actions-api
+    path_regex: ^/api/actions/.*$
+    action: ALLOW
+
+  - name: allow-access-to-api-v2 # This is related to manifests/packages/oci etc.
+    path_regex: ^/v2/.*$
+    action: ALLOW
+
+  - name: allow-access-to-api-v1
+    path_regex: ^/api/v1/.*$
+    action: ALLOW

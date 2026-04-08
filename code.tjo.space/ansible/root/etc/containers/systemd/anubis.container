@@ -1,0 +1,32 @@
+[Unit]
+Description=Anubis container
+
+[Container]
+ContainerName=anubis
+Image=ghcr.io/techarohq/anubis
+AutoUpdate=registry
+Network=code.network
+User=1010
+Group=1010
+ReadOnly=true
+IP6=fd6a:e0a3:bb4b:c6b3::2
+
+Volume=/etc/anubis/botPolicies.yaml:/botPolicies.yaml:ro
+
+Environment=BIND=:3000
+Environment=DIFFICULTY=4
+Environment=METRICS_BIND=:9090
+Environment=SERVE_ROBOTS_TXT=true
+Environment=TARGET=http://[fd6a:e0a3:bb4b:c6b3::5]:3000
+Environment=OG_PASSTHROUGH=true
+Environment=OG_EXPIRY_TIME=24h
+Environment=COOKIE_DOMAIN=code.tjo.space
+Environment=WEBMASTER_EMAIL=webmaster@tjo.space
+Environment=POLICY_FNAME=/botPolicies.yaml
+
+[Service]
+Restart=always
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target default.target
