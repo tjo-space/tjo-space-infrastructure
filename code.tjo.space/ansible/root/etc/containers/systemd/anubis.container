@@ -20,7 +20,7 @@ Environment=SERVE_ROBOTS_TXT=true
 Environment=TARGET=http://[fd6a:e0a3:bb4b:c6b3::5]:3000
 Environment=OG_PASSTHROUGH=true
 Environment=OG_EXPIRY_TIME=24h
-Environment=COOKIE_DOMAIN=code.tjo.space
+Environment=COOKIE_DYNAMIC_DOMAIN=true
 Environment=WEBMASTER_EMAIL=webmaster@tjo.space
 Environment=POLICY_FNAME=/botPolicies.yaml
 
