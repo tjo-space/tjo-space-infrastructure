@@ -31,7 +31,7 @@ provider "authentik" {
 }
 
 provider "proxmox" {
-  endpoint  = "https://proxmox.tjo.cloud/api2/json"
+  endpoint  = "https://proxmox.cloud.internal/api2/json"
   insecure  = true
   api_token = var.proxmox_token
 

@@ -3,7 +3,7 @@ Description=Authentik LDAP Outpost container
 
 [Container]
 ContainerName=authentik-ldap
-Image=ghcr.io/goauthentik/ldap:2025.10.3
+Image=ghcr.io/goauthentik/ldap:2026.2.2
 Network=media.network
 Environment=AUTHENTIK_HOST=https://id.tjo.space
 Environment=AUTHENTIK_INSECURE=false

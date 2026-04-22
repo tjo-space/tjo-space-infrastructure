@@ -3,7 +3,7 @@ Description=Authentik PROXY Outpost container
 
 [Container]
 ContainerName=authentik-proxy
-Image=ghcr.io/goauthentik/proxy:2025.10.3
+Image=ghcr.io/goauthentik/proxy:2026.2.2
 Network=media.network
 Environment=AUTHENTIK_HOST=https://id.tjo.space
 Environment=AUTHENTIK_INSECURE=false
