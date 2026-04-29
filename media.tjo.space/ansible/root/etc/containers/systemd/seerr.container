@@ -3,7 +3,7 @@ Description=Seerr container
 
 [Container]
 ContainerName=seerr
-Image=ghcr.io/seerr-team/seerr:v3.1.0
+Image=ghcr.io/seerr-team/seerr:v3.2.0
 Network=media.network
 User=1010
 Group=1010
