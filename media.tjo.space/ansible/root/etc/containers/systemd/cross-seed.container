@@ -1,23 +1,21 @@
 [Unit]
-Description=Qbittorrent container
-After=qbittorrent-vpn.service
-Requires=qbittorrent-vpn.service
+Description=cross-seed container
 
 [Container]
-ContainerName=qbittorrent
-Image=ghcr.io/linuxserver/qbittorrent
-Network=qbittorrent-vpn.container
+ContainerName=cross-seed
+Image=ghcr.io/cross-seed/cross-seed:6
+Exec=daemon
+Network=media.network
 User=1010
 Group=1010
-Volume=/srv/data/fast/qbittorrent:/config:rw
+Volume=/srv/data/fast/cross-seed:/config:rw
 Volume=/srv/data/ephemeral/downloads:/downloads:rw
 Volume=/srv/data/large/tvseries:/data/tvshows:ro
 Volume=/srv/data/large/movies:/data/movies:ro
 Volume=/srv/data/large/music:/data/music:ro
 AutoUpdate=registry
 ReadOnly=true
-# Port is published in the vpn container
-#PublishPort=8080:8080
+IP6=fd6a:e0a3:bb4b:c6b3::21
 
 [Service]
 Restart=always
