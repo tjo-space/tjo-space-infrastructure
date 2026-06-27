@@ -52,4 +52,4 @@ build:
   buildah push code.tjo.space/tjo-space/jellyfin:${JELLYFIN_VERSION}-${DATE}
 
 podman-auto-update node:
-  ssh bine@{{node}}.media.space.internal -p 2222 "sudo podman auto-update"
+  ssh bine@{{node}}.media.space.internal -p 2222 "sudo podman system prune --force --all && sudo podman auto-update"
