@@ -61,33 +61,8 @@ resource "desec_rrset" "https" {
 
 locals {
   records = [
-    ## Id
     { type = "CNAME", subdomain = "id", records = ["id.tjo.cloud."] },
     { type = "CNAME", subdomain = "status", records = ["tjo-space.github.io."] },
-    ## EMAIL
-    { type = "MX", subdomain = "", records = ["10 mail.tjo.cloud."] },
-    { type = "TXT", subdomain = "202507e._domainkey", records = ["v=DKIM1; k=ed25519; h=sha256; p=QWivDgL9vFoPzbYmdQagOR/OnNr8gLRu1bTTszIqfJA="] },
-    { type = "TXT", subdomain = "202507r._domainkey", records = ["v=DKIM1; k=rsa; h=sha256; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2F1gjOzE6f8Rurvtdy/B6Xs2zhGZdtZ3YFfP/LpwN2aVjBVASGUXFhjv24hGulfJAyE28MNDXem3xvNjD1UFFyctuplp2CALSlElEb0AcAnoC3tgD0QEPlS3fkEqJ9QEctH/QG0qISUYxGqvispKRCIWKzVPo1zzGIL/Zasdh0RSorizhYwt548FH+e/g70HHtj1LPBbow2C304wbmQ7UMeOfoKGO0pidtX0Ic/eMz7PJH4JSer9UsFf1s4rkWNjw7/Q2mpay+BSZnLkYe5+ucuuZmHYUMFKHKot9DQ3p2vFUMQaIVSo/Yv7FQvSM6b2KG0pp7cDZx5XOzLkUVjKMwIDAQAB"] },
-    { type = "TXT", subdomain = "", records = [
-      "v=spf1 mx ra=postmaster -all",
-      "google-site-verification=oDVJ2M9VSmYlEOFOSrg74kTeVigpkUQS6BP0f_zOeww",
-    ] },
-    { type = "SRV", subdomain = "_jmap._tcp", records = ["0 1 443 mail.tjo.cloud."] },
-    { type = "SRV", subdomain = "_calddavs._tcp", records = ["0 1 443 mail.tjo.cloud."] },
-    { type = "SRV", subdomain = "_carddavs._tcp", records = ["0 1 443 mail.tjo.cloud."] },
-    { type = "SRV", subdomain = "_imaps._tcp", records = ["0 1 443 mail.tjo.cloud."] },
-    { type = "SRV", subdomain = "_submissions._tcp", records = ["0 1 443 mail.tjo.cloud."] },
-    { type = "CNAME", subdomain = "autoconfig", records = ["mail.tjo.cloud."] },
-    { type = "CNAME", subdomain = "autodiscover", records = ["mail.tjo.cloud."] },
-    { type = "CNAME", subdomain = "mta-sts", records = ["mail.tjo.cloud."] },
-    { type = "TXT", subdomain = "_mta-sts", records = ["v=STSv1; id=12389896138107905122"] },
-    { type = "TXT", subdomain = "_dmarc", records = ["v=DMARC1; p=reject; rua=mailto:postmaster@tjo.space; ruf=mailto:postmaster@tjo.space"] },
-    { type = "TXT", subdomain = "_smtp._tls", records = ["v=TLSRPTv1; rua=mailto:postmaster@tjo.space"] },
-    ## SYSTEM
-    { type = "A", subdomain = "batuu.system", records = ["100.65.175.106"] },
-    { type = "A", subdomain = "nevaroo.system", records = ["100.69.126.80"] },
-    { type = "AAAA", subdomain = "batuu.system", records = ["fd7a:115c:a1e0::b01:af6a"] },
-    { type = "AAAA", subdomain = "nevaroo.system", records = ["fd7a:115c:a1e0::6501:7e50"] },
   ]
 }
 resource "desec_rrset" "records" {
