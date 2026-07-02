@@ -36,7 +36,6 @@
     - "/srv/data/fast/tdarr/config"
     - "/srv/data/fast/bazarr"
     - "/srv/data/fast/qbittorrent"
-    - "/srv/data/fast/cross-seed"
     - "/srv/data/large/tvseries"
     - "/srv/data/large/movies"
     - "/srv/data/large/music"
@@ -73,7 +72,6 @@
     - sonarr
     - tdarr
     - bazarr
-    - cross-seed
     - authentik-ldap
     - authentik-proxy
   tags: config-reload
@@ -102,7 +100,6 @@
     - sonarr
     - tdarr
     - bazarr
-    - cross-seed
     - authentik-ldap
     - authentik-proxy
   tags: config-reload
