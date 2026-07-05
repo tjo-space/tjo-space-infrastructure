@@ -3,7 +3,8 @@ Description=valkey-exporter container
 
 [Container]
 ContainerName=valkey-exporter
-Image=docker.io/oliver006/redis_exporter:v1.80.1@sha256:bac9872da2b48e6eebbffb11517a5dcda59958eda51e1e4231eeb5dd516b4a5f
+# v1.80.1
+Image=docker.io/oliver006/redis_exporter@sha256:bac9872da2b48e6eebbffb11517a5dcda59958eda51e1e4231eeb5dd516b4a5f
 Network=code.network
 User=1010
 Group=1010
