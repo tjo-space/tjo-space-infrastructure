@@ -25,7 +25,7 @@ resource "authentik_application" "users" {
   name              = "media.tjo.space"
   slug              = "mediatjospace"
   group             = "Movies, TV Shows and Music"
-  meta_icon         = "/media/public/application-icons/jellyfin.svg"
+  meta_icon         = "application-icons/jellyfin.svg"
   protocol_provider = authentik_provider_ldap.users.id
 }
 resource "authentik_rbac_permission_user" "ldap" {
@@ -47,7 +47,7 @@ resource "authentik_application" "request" {
   name      = "request.media.tjo.space"
   slug      = "requestmediatjospace"
   group     = "Movies, TV Shows and Music"
-  meta_icon = "/media/public/application-icons/jellyseerr.svg"
+  meta_icon = "application-icons/jellyseerr.svg"
 }
 
 // Management
