@@ -9,21 +9,22 @@ data "dns_aaaa_record_set" "ingress" {
 resource "desec_rrset" "ingress" {
   for_each = { for pair in setproduct(["A", "AAAA"], [
     "",
-    "cloud",
-    "collabora",
-    "code",
+    "*.media",
     "chat",
-    "turn.chat",
+    "cloud",
+    "code",
+    "collabora",
     "mas.chat",
     "matrix.chat",
-    "webhook.chat",
-    "*.media",
+    "mealie",
     "media",
     "paperless",
     "photos",
     "rss",
     "search",
+    "turn.chat",
     "vault",
+    "webhook.chat",
   ]) : "${pair[0]}-${pair[1]}" => { type = pair[0], subname = pair[1] } }
 
   domain  = "tjo.space"
@@ -35,21 +36,22 @@ resource "desec_rrset" "ingress" {
 resource "desec_rrset" "https" {
   for_each = toset([
     "",
-    "cloud",
-    "collabora",
-    "code",
+    "*.media",
     "chat",
-    "turn.chat",
+    "cloud",
+    "code",
+    "collabora",
     "mas.chat",
     "matrix.chat",
-    "webhook.chat",
-    "*.media",
+    "mealie",
     "media",
     "paperless",
     "photos",
     "rss",
     "search",
+    "turn.chat",
     "vault",
+    "webhook.chat",
   ])
 
   domain  = "tjo.space"
