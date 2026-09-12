@@ -4,14 +4,9 @@
   "themes": [],
   "menuLinks": [
     {
-      "name": "Request Media",
+      "name": "Request Content",
       "url": "https://request.media.tjo.space",
       "icon": "search"
-    },
-    {
-      "name": "tjo.space Home",
-      "url": "https://tjo.space",
-      "icon": "home"
     }
   ],
   "servers": [],
