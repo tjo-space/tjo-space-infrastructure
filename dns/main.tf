@@ -26,6 +26,8 @@ resource "desec_rrset" "ingress" {
     "turn.chat",
     "vault",
     "webhook.chat",
+    "cryptpad",
+    "sandbox.cryptpad",
   ]) : "${pair[0]}-${pair[1]}" => { type = pair[0], subname = pair[1] } }
 
   domain  = "tjo.space"
@@ -54,6 +56,9 @@ resource "desec_rrset" "https" {
     "turn.chat",
     "vault",
     "webhook.chat",
+    "cryptpad",
+    "sandbox.cryptpad",
+
   ])
 
   domain  = "tjo.space"
