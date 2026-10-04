@@ -28,6 +28,7 @@ resource "desec_rrset" "ingress" {
     "webhook.chat",
     "cryptpad",
     "sandbox.cryptpad",
+    "redlib",
   ]) : "${pair[0]}-${pair[1]}" => { type = pair[0], subname = pair[1] } }
 
   domain  = "tjo.space"
@@ -58,7 +59,7 @@ resource "desec_rrset" "https" {
     "webhook.chat",
     "cryptpad",
     "sandbox.cryptpad",
-
+    "redlib",
   ])
 
   domain  = "tjo.space"
