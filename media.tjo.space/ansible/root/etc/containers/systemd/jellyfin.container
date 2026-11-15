@@ -3,7 +3,7 @@ Description=Jellyfin container
 
 [Container]
 ContainerName=jellyfin
-Image=code.tjo.space/tjo-space/jellyfin:12.1-20260919
+Image=code.tjo.space/tjo-space/jellyfin:12.3-20261023
 Network=media.network
 User=1010
 Group=1010
