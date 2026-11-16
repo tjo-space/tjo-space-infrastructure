@@ -29,7 +29,7 @@ resource "desec_rrset" "ingress" {
     "cryptpad",
     "sandbox.cryptpad",
     "redlib",
-    "webmail",
+    "mail",
   ]) : "${pair[0]}-${pair[1]}" => { type = pair[0], subname = pair[1] } }
 
   domain  = "tjo.space"
@@ -61,7 +61,7 @@ resource "desec_rrset" "https" {
     "cryptpad",
     "sandbox.cryptpad",
     "redlib",
-    "webmail",
+    "mail",
   ])
 
   domain  = "tjo.space"
