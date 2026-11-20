@@ -45,3 +45,7 @@ shared:
   git clone --depth=1 ssh://git@code.tjo.space/tjo-cloud/infrastructure.git $TEMP
   rsync -a $TEMP/shared/ shared/
   rm -rf $TEMP
+
+packages-upgrade-all:
+  @just code configure-all upgrade
+  @just media configure-all upgrade
